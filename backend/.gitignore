@@ -1,0 +1,13 @@
+node_modules/
+.env
+uploads/*
+!uploads/.gitkeep
+!uploads/products/
+uploads/products/*
+!uploads/products/.gitkeep
+!uploads/PartnerLogo/
+uploads/PartnerLogo/*
+!uploads/PartnerLogo/.gitkeep
+!uploads/ReportPdf/
+uploads/ReportPdf/*
+!uploads/ReportPdf/.gitkeep
