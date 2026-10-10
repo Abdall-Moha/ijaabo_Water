@@ -6,6 +6,16 @@ import { uploadReportPdf } from "../middleware/uploadMiddleware.js";
 
 const router = Router();
 
+// Admin report list is protected. The public root list remains for published site documents.
+router.get("/admin", authMiddleware, async (request, response) => {
+  try {
+    const reports = await QualityReport.find().sort({ reportDate: -1 });
+    return response.json(reports);
+  } catch (error) {
+    return response.status(500).json({ message: "Failed to get quality reports" });
+  }
+});
+
 // Get all quality reports
 router.get("/", async (request, response) => {
   try {

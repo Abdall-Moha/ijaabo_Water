@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: Inter, "Segoe UI", Arial, ui-sans-serif, system-ui, sans-serif;
+  --color-navy: #18344a;
+  --color-ocean: #236b9a;
+  --color-ocean-dark: #174d72;
+  --color-water: #2878a3;
+  --color-gold: #efbd48;
+}
+
+@layer base {
+  * { @apply box-border; }
+  html { @apply min-w-[320px] scroll-smooth; }
+  body { @apply m-0 min-w-[320px] bg-white font-sans text-slate-800 antialiased; }
+  a { @apply text-inherit no-underline; }
+  ::selection { @apply bg-sky-100 text-navy; }
+}
+
+/* Keep the page behind the fixed mobile navigation from scrolling. */
+body.menu-open { @apply overflow-hidden; }

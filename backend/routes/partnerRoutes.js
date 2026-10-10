@@ -6,10 +6,20 @@ import { uploadPartnerLogo } from "../middleware/uploadMiddleware.js";
 
 const router = Router();
 
+// Admin view includes inactive partners for editing and publishing.
+router.get("/admin", authMiddleware, async (request, response) => {
+  try {
+    const partners = await Partner.find().sort({ createdAt: -1 });
+    return response.json(partners);
+  } catch (error) {
+    return response.status(500).json({ message: "Failed to get partners" });
+  }
+});
+
 // Get active partners for the public website
 router.get("/", async (request, response) => {
   try {
-    const partners = await Partner.find({ isActive: true }).sort({ sortOrder: 1 });
+    const partners = await Partner.find({ isActive: true }).sort({ createdAt: 1 });
     return response.json(partners);
   } catch (error) {
     return response.status(500).json({ message: "Failed to get partners" });
@@ -24,8 +34,7 @@ router.post("/", authMiddleware, uploadPartnerLogo.single("logo"), async (reques
       name: body.name,
       logo: request.file ? `/uploads/PartnerLogo/${request.file.filename}` : body.logo,
       website: body.website,
-      isActive: body.isActive,
-      sortOrder: body.sortOrder
+      isActive: body.isActive
     });
 
     return response.status(201).json(partner);
@@ -50,8 +59,7 @@ router.put("/:id", authMiddleware, uploadPartnerLogo.single("logo"), async (requ
     const updates = {
       name: body.name,
       website: body.website,
-      isActive: body.isActive,
-      sortOrder: body.sortOrder
+      isActive: body.isActive
     };
 
     if (request.file) {

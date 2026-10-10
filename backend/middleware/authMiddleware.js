@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
-function authMiddleware(request, response, next) {
+async function authMiddleware(request, response, next) {
   const authorization = request.headers.authorization;
 
   if (!authorization || !authorization.startsWith("Bearer ")) {
@@ -13,17 +14,27 @@ function authMiddleware(request, response, next) {
 
   const token = authorization.split(" ")[1];
 
+  let decoded;
   try {
-    const user = jwt.verify(token, process.env.JWT_SECRET);
+    decoded = jwt.verify(token, process.env.JWT_SECRET);
+  } catch (error) {
+    return response.status(401).json({ message: "Invalid or expired token" });
+  }
+
+  try {
+    const user = await User.findById(decoded.id).select("name email role isActive");
+    if (!user || !user.isActive) {
+      return response.status(401).json({ message: "Admin account is unavailable" });
+    }
 
     if (user.role !== "ADMIN") {
       return response.status(403).json({ message: "Admin access is required" });
     }
 
-    request.user = user;
+    request.user = { id: user._id.toString(), name: user.name, email: user.email, role: user.role };
     next();
   } catch (error) {
-    return response.status(401).json({ message: "Invalid or expired token" });
+    return response.status(500).json({ message: "Could not verify admin account" });
   }
 }
 

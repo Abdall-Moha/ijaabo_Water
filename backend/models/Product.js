@@ -22,10 +22,6 @@ const productSchema = new mongoose.Schema({
   isActive: {
     type: Boolean,
     default: true
-  },
-  sortOrder: {
-    type: Number,
-    default: 0
   }
 }, {
   timestamps: true

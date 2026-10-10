@@ -6,10 +6,20 @@ import { uploadProductImage } from "../middleware/uploadMiddleware.js";
 
 const router = Router();
 
+// Admin product management includes unpublished products.
+router.get("/admin", authMiddleware, async (request, response) => {
+  try {
+    const products = await Product.find().sort({ createdAt: -1 });
+    return response.json(products);
+  } catch (error) {
+    return response.status(500).json({ message: "Failed to get products" });
+  }
+});
+
 // Get active products for the public website
 router.get("/", async (request, response) => {
   try {
-    const products = await Product.find({ isActive: true }).sort({ sortOrder: 1 });
+    const products = await Product.find({ isActive: true }).sort({ createdAt: 1 });
     return response.json(products);
   } catch (error) {
     return response.status(500).json({ message: "Failed to get products" });
@@ -25,8 +35,7 @@ router.post("/", authMiddleware, uploadProductImage.single("image"), async (requ
       size: body.size,
       image: request.file ? `/uploads/products/${request.file.filename}` : body.image,
       description: body.description,
-      isActive: body.isActive,
-      sortOrder: body.sortOrder
+      isActive: body.isActive
     });
 
     return response.status(201).json(product);
@@ -52,8 +61,7 @@ router.put("/:id", authMiddleware, uploadProductImage.single("image"), async (re
       name: body.name,
       size: body.size,
       description: body.description,
-      isActive: body.isActive,
-      sortOrder: body.sortOrder
+      isActive: body.isActive
     };
 
     if (request.file) {
