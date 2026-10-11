@@ -1,10 +1,12 @@
 import { Router } from "express";
+import mongoose from "mongoose";
 import Order from "../models/Order.js";
 import Product from "../models/Product.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import publicSubmissionLimiter from "../middleware/rateLimitMiddleware.js";
 
 const router = Router();
+const orderStatuses = ["PENDING", "CONFIRMED", "PROCESSING", "DELIVERED", "CANCELLED"];
 
 // Customer submits an order
 router.post("/", publicSubmissionLimiter, async (request, response) => {
@@ -104,15 +106,31 @@ router.get("/:id", authMiddleware, async (request, response) => {
 // Admin updates order status
 router.put("/:id/status", authMiddleware, async (request, response) => {
   try {
-    const { status } = request.body;
+    const { id } = request.params;
+    const { status } = request.body || {};
 
-    const order = await Order.findByIdAndUpdate(
-      request.params.id,
-      { status },
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return response.status(400).json({ message: "Invalid order ID" });
+    }
+
+    if (!orderStatuses.includes(status)) {
+      return response.status(400).json({ message: "Invalid order status" });
+    }
+
+    // The predicate makes the final-state check and update one atomic operation.
+    const order = await Order.findOneAndUpdate(
+      { _id: id, status: { $ne: "DELIVERED" } },
+      { $set: { status } },
       { new: true, runValidators: true }
     );
 
     if (!order) {
+      const exists = await Order.exists({ _id: id });
+      if (exists) {
+        return response.status(409).json({
+          message: "Delivered orders are final and their status cannot be changed.",
+        });
+      }
       return response.status(404).json({
         message: "Order not found",
       });

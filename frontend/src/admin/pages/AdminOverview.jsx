@@ -92,17 +92,17 @@ export default function AdminOverview() {
           </Link>
         }
       />
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-3">
         {metrics.map(([label, value, Icon]) => (
           <article
             key={label}
-            className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+            className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5"
           >
-            <div className="flex items-center justify-between">
-              <p className="text-sm font-medium text-slate-600">{label}</p>
-              <Icon className="text-xl text-[#2B4593]" />
+            <div className="flex items-start justify-between gap-2">
+              <p className="min-w-0 text-xs font-medium leading-5 text-slate-600 sm:text-sm">{label}</p>
+              <Icon className="shrink-0 text-lg text-[#2B4593] sm:text-xl" />
             </div>
-            <p className="mt-3 text-3xl font-bold text-slate-900">
+            <p className="mt-3 break-words text-xl font-bold text-slate-900 sm:text-3xl">
               {value === undefined
                 ? "Unavailable"
                 : value === null

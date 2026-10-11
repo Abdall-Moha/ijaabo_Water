@@ -22,7 +22,7 @@ export default function AdminInquiries() {
   const [status, setStatus] = useState("all");
   const [page, setPage] = useState(1);
   const [viewing, setViewing] = useState(null);
-  const [notice, setNotice] = useState("");
+  const [notice, setNotice] = useState(null);
   const [savingId, setSavingId] = useState("");
 
   const load = useCallback(async () => {
@@ -62,7 +62,7 @@ export default function AdminInquiries() {
 
   async function changeStatus(item, nextStatus) {
     setSavingId(item._id);
-    setNotice("");
+    setNotice(null);
     try {
       const { data } = await api.put(
         `/partnership-requests/${item._id}/status`,
@@ -71,11 +71,12 @@ export default function AdminInquiries() {
       setRecords((current) =>
         current.map((record) => (record._id === item._id ? data : record)),
       );
-      setNotice("Inquiry status updated.");
+      setNotice({ tone: "success", text: "Inquiry status updated." });
     } catch (saveError) {
-      setNotice(
-        saveError.response?.data?.message || "Could not update inquiry status.",
-      );
+      setNotice({
+        tone: "error",
+        text: saveError.response?.data?.message || "Could not update inquiry status.",
+      });
     } finally {
       setSavingId("");
     }
@@ -93,11 +94,12 @@ export default function AdminInquiries() {
       setRecords((current) =>
         current.filter((record) => record._id !== item._id),
       );
-      setNotice("Inquiry deleted.");
+      setNotice({ tone: "success", text: "Inquiry deleted." });
     } catch (deleteError) {
-      setNotice(
-        deleteError.response?.data?.message || "Could not delete inquiry.",
-      );
+      setNotice({
+        tone: "error",
+        text: deleteError.response?.data?.message || "Could not delete inquiry.",
+      });
     }
   }
 
@@ -111,7 +113,7 @@ export default function AdminInquiries() {
       />
       {notice && (
         <div className="mb-4">
-          <Notice tone="success">{notice}</Notice>
+          <Notice tone={notice.tone}>{notice.text}</Notice>
         </div>
       )}
       {error && (
@@ -190,19 +192,23 @@ export default function AdminInquiries() {
                         {new Date(item.createdAt).toLocaleDateString()}
                       </td>
                       <td className="px-3 py-3">
-                        <select
-                          className="rounded-lg border border-slate-300 px-2 py-2 text-xs"
-                          aria-label={`Status for ${item.organizationName}`}
-                          value={item.status}
-                          disabled={savingId === item._id}
-                          onChange={(event) =>
-                            changeStatus(item, event.target.value)
-                          }
-                        >
-                          {statuses.map((value) => (
-                            <option key={value}>{value}</option>
-                          ))}
-                        </select>
+                        {item.status === "COMPLETED" ? (
+                          <StatusTag value={item.status} />
+                        ) : (
+                          <select
+                            className="rounded-lg border border-slate-300 px-2 py-2 text-xs"
+                            aria-label={`Status for ${item.organizationName}`}
+                            value={item.status}
+                            disabled={savingId === item._id}
+                            onChange={(event) =>
+                              changeStatus(item, event.target.value)
+                            }
+                          >
+                            {statuses.map((value) => (
+                              <option key={value}>{value}</option>
+                            ))}
+                          </select>
+                        )}
                       </td>
                       <td className="px-3 py-3">
                         <div className="flex gap-1">

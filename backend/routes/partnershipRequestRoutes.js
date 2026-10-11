@@ -68,13 +68,20 @@ router.put("/:id/status", authMiddleware, async (request, response) => {
       return response.status(400).json({ message: "Invalid partnership request status" });
     }
 
-    const partnershipRequest = await PartnershipRequest.findByIdAndUpdate(
-      request.params.id,
-      { status: request.body.status },
+    // The predicate prevents a concurrent update from changing a completed request.
+    const partnershipRequest = await PartnershipRequest.findOneAndUpdate(
+      { _id: request.params.id, status: { $ne: "COMPLETED" } },
+      { $set: { status: request.body.status } },
       { new: true, runValidators: true }
     );
 
     if (!partnershipRequest) {
+      const exists = await PartnershipRequest.exists({ _id: request.params.id });
+      if (exists) {
+        return response.status(409).json({
+          message: "Completed partnership requests are final and their status cannot be changed.",
+        });
+      }
       return response.status(404).json({ message: "Partnership request not found" });
     }
 

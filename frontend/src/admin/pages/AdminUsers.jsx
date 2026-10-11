@@ -37,7 +37,13 @@ export default function AdminUsers() {
     }
   }, []);
 
-  useEffect(() => { loadAdmins(); }, [loadAdmins]);
+  useEffect(() => {
+    let active = true;
+    Promise.resolve().then(() => {
+      if (active) loadAdmins();
+    });
+    return () => { active = false; };
+  }, [loadAdmins]);
 
   function startCreate() {
     setForm(blankForm);

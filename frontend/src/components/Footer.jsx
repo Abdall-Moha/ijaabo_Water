@@ -69,9 +69,10 @@ export default function Footer() {
           <p className="m-0 text-sm text-white">Mogadishu, Somalia</p>
         </div>
       </div>
-      <div className="mx-auto flex min-h-12 w-[calc(100%-2.25rem)] max-w-[1200px] items-center justify-between gap-3 border-t border-white/15 text-[10px] text-slate-400 sm:w-[calc(100%-3rem)] sm:text-xs">
+      <div className="mx-auto flex w-[calc(100%-2.25rem)] max-w-[1200px] flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-white/15 py-4 text-[10px] text-slate-400 sm:w-[calc(100%-3rem)] sm:text-xs">
         <span>© {currentYear} Ijaabo Water. All rights reserved.</span>
         <span>Pure water. Better tomorrow.</span>
+        <Link className="text-slate-400 transition hover:text-slate-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold" to="/admin-login">Admin Login</Link>
       </div>
     </footer>
   );

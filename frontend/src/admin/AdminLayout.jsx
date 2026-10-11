@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   FiActivity,
   FiBox,
+  FiExternalLink,
   FiFileText,
   FiGrid,
   FiLogOut,
@@ -15,6 +16,7 @@ import {
   Navigate,
   NavLink,
   Outlet,
+  Link,
   useLocation,
   useNavigate,
 } from "react-router-dom";
@@ -66,7 +68,7 @@ export default function AdminLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-800 lg:flex">
+    <div className="relative h-dvh overflow-hidden bg-slate-100 text-slate-800 lg:flex">
       {menuOpen && (
         <button
           aria-label="Close admin menu"
@@ -75,9 +77,9 @@ export default function AdminLayout() {
         />
       )}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex w-72 flex-col bg-[#00008B] text-white transition-transform duration-200 lg:static lg:translate-x-0 ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed inset-y-0 left-0 z-40 flex h-dvh w-72 flex-col overflow-hidden bg-[#00008B] text-white transition-transform duration-200 lg:translate-x-0 ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
-        <div className="flex h-16 items-center justify-between border-b border-white/15 px-5">
+        <div className="flex h-14 shrink-0 items-center justify-between border-b border-white/15 px-5">
           <div>
             <b className="text-lg tracking-wide">IJAABO</b>
             <span className="ml-2 text-xs text-blue-200">ADMIN</span>
@@ -92,7 +94,7 @@ export default function AdminLayout() {
         </div>
         <nav
           aria-label="Admin navigation"
-          className="flex-1 space-y-1 overflow-y-auto p-4"
+          className="min-h-0 flex-1 space-y-0.5 overflow-y-auto p-3 lg:space-y-0 lg:overflow-hidden"
         >
           {navigation.map(([label, path, Icon, exact]) => (
             <NavLink
@@ -101,7 +103,7 @@ export default function AdminLayout() {
               end={exact}
               onClick={() => setMenuOpen(false)}
               className={({ isActive }) =>
-                `flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm font-medium transition ${isActive ? "bg-white text-[#00008B]" : "text-blue-100 hover:bg-white/10 hover:text-white"}`
+                `flex min-h-10 items-center gap-3 rounded-lg px-3 text-sm font-medium transition lg:min-h-9 ${isActive ? "bg-white text-[#00008B]" : "text-blue-100 hover:bg-white/10 hover:text-white"}`
               }
             >
               <Icon className="text-lg" />
@@ -109,15 +111,25 @@ export default function AdminLayout() {
             </NavLink>
           ))}
         </nav>
-        <button
-          className="m-4 flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm font-semibold text-blue-100 hover:bg-white/10 hover:text-white"
-          onClick={signOut}
-        >
-          <FiLogOut className="text-lg" />
-          Log out
-        </button>
+        <div className="mt-auto shrink-0 space-y-1 border-t border-white/15 p-2 sm:p-3">
+          <button
+            className="flex min-h-10 w-full items-center gap-3 rounded-lg px-3 text-sm font-semibold text-blue-100 hover:bg-white/10 hover:text-white"
+            onClick={signOut}
+          >
+            <FiLogOut className="text-lg" />
+            Log out
+          </button>
+          <Link
+            to="/"
+            onClick={() => setMenuOpen(false)}
+            className="flex min-h-9 items-center gap-2 border-t border-white/10 px-3 pt-1 text-xs font-medium text-blue-100 transition hover:text-white"
+          >
+            <FiExternalLink className="text-sm" />
+            Go to Website
+          </Link>
+        </div>
       </aside>
-      <div className="min-w-0 flex-1">
+      <div className="h-dvh min-w-0 flex-1 overflow-y-auto lg:ml-72">
         <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
             <button

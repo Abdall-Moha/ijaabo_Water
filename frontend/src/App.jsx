@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
@@ -22,38 +23,52 @@ import AdminSettings from "./admin/pages/AdminSettings.jsx";
 import AdminUsers from "./admin/pages/AdminUsers.jsx";
 
 function AdminNotFound() {
-  return <section className="rounded-xl border border-slate-200 bg-white p-8"><h2 className="text-xl font-bold">Admin page not found</h2><p className="mt-2 text-sm text-slate-600">Choose a page from the admin menu.</p></section>;
+  return (
+    <section className="rounded-xl border border-slate-200 bg-white p-8">
+      <h2 className="text-xl font-bold">Admin page not found</h2>
+      <p className="mt-2 text-sm text-slate-600">
+        Choose a page from the admin menu.
+      </p>
+    </section>
+  );
 }
 
 export default function App() {
   const { pathname } = useLocation();
-  const isAdminPage = pathname.startsWith("/admin");
 
-  return <>
-    {!isAdminPage && <Header />}
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/products-services" element={<ProductsServices />} />
-      <Route path="/quality-safety" element={<QualitySafety />} />
-      <Route path="/process" element={<Process />} />
-      <Route path="/impact" element={<Impact />} />
-      <Route path="/partners" element={<Partners />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/admin-login" element={<AdminLogin />} />
-      <Route path="/admin" element={<RequireAdmin />}>
-        <Route index element={<AdminOverview />} />
-        <Route path="products" element={<AdminProducts />} />
-        <Route path="orders" element={<AdminOrders />} />
-        <Route path="quality-reports" element={<AdminQualityReports />} />
-        <Route path="partners" element={<AdminPartners />} />
-        <Route path="inquiries" element={<AdminInquiries />} />
-        <Route path="settings" element={<AdminSettings />} />
-        <Route path="users" element={<AdminUsers />} />
-        <Route path="*" element={<AdminNotFound />} />
-      </Route>
-      <Route path="*" element={<Placeholder title="Page not found" />} />
-    </Routes>
-    {!isAdminPage && <Footer />}
-  </>;
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, [pathname]);
+  const isDashboardPage =
+    pathname === "/admin" || pathname.startsWith("/admin/");
+
+  return (
+    <>
+      {!isDashboardPage && <Header />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/products-services" element={<ProductsServices />} />
+        <Route path="/quality-safety" element={<QualitySafety />} />
+        <Route path="/process" element={<Process />} />
+        <Route path="/impact" element={<Impact />} />
+        <Route path="/partners" element={<Partners />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin" element={<RequireAdmin />}>
+          <Route index element={<AdminOverview />} />
+          <Route path="products" element={<AdminProducts />} />
+          <Route path="orders" element={<AdminOrders />} />
+          <Route path="quality-reports" element={<AdminQualityReports />} />
+          <Route path="partners" element={<AdminPartners />} />
+          <Route path="inquiries" element={<AdminInquiries />} />
+          <Route path="settings" element={<AdminSettings />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="*" element={<AdminNotFound />} />
+        </Route>
+        <Route path="*" element={<Placeholder title="Page not found" />} />
+      </Routes>
+      {!isDashboardPage && <Footer />}
+    </>
+  );
 }

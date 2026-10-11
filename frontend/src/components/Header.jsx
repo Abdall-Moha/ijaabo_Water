@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import Brand from "./Brand.jsx";
+import { useAdminAuth } from "../admin/useAdminAuth.js";
 
 const links = [
   ["About", "/about"],
@@ -14,6 +15,8 @@ const links = [
 ];
 
 export default function Header() {
+  const { admin } = useAdminAuth();
+  const isAdmin = admin?.role === "ADMIN";
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -30,7 +33,7 @@ export default function Header() {
     <>
       {/* Fixed header */}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white">
-        <div className="relative mx-auto flex h-[68px] w-[calc(100%-2rem)] max-w-[1200px] items-center justify-between sm:w-[calc(100%-3rem)]">
+        <div className="relative mx-auto flex h-[68px] w-[calc(100%-2rem)] max-w-[1200px] items-center justify-between px-0 sm:w-[calc(100%-3rem)]">
 
           {/* Logo on the left */}
           <div className="relative z-30 shrink-0">
@@ -39,7 +42,7 @@ export default function Header() {
 
           {/* Desktop navigation centered in the header */}
           <nav
-            className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-5 xl:gap-6 lg:flex"
+            className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-4 xl:gap-6 xl:flex"
             aria-label="Main navigation"
           >
             <NavLink
@@ -69,17 +72,24 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Order button on the right */}
-          <Link
-            to="/contact"
-            className="ml-auto mr-4 hidden h-10 shrink-0 items-center justify-center rounded-md bg-gold px-4 text-[13px] font-bold text-navy transition hover:bg-amber-300 lg:inline-flex"
-          >
-            Order Water
-          </Link>
+          {/* Desktop actions */}
+          <div className="ml-auto hidden shrink-0 items-center gap-2 lg:flex">
+            {isAdmin && (
+              <Link to="/admin" className="inline-flex h-10 items-center justify-center rounded-md border border-slate-200 px-3 text-[13px] font-bold text-ocean transition hover:border-ocean hover:bg-sky-50">
+                Dashboard
+              </Link>
+            )}
+            <Link
+              to="/contact"
+              className="hidden h-10 items-center justify-center rounded-md bg-gold px-4 text-[13px] font-bold text-navy transition hover:bg-amber-300 xl:inline-flex"
+            >
+              Order Water
+            </Link>
+          </div>
 
           {/* Mobile menu button */}
           <button
-            className="relative z-30 grid size-10 shrink-0 place-items-center rounded-md border border-slate-200 bg-slate-50 text-xl text-navy transition hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold lg:hidden"
+            className="relative z-30 ml-auto grid size-10 shrink-0 place-items-center rounded-md border border-slate-200 bg-slate-50 text-xl text-navy transition hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold xl:hidden"
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
@@ -91,8 +101,8 @@ export default function Header() {
 
         {/* Mobile navigation */}
         <nav
-          className={`fixed inset-y-0 right-0 z-20 flex w-[min(320px,85vw)] flex-col items-stretch gap-0 overflow-y-auto bg-white px-6 pb-8 pt-24 shadow-2xl transition-transform duration-300 motion-reduce:transition-none lg:hidden ${
-            open ? "translate-x-0" : "translate-x-full"
+          className={`fixed inset-y-0 left-0 z-20 flex w-[min(320px,85vw)] flex-col items-stretch gap-0 overflow-y-auto bg-white px-6 pb-8 pt-24 shadow-2xl transition-transform duration-300 motion-reduce:transition-none xl:hidden ${
+            open ? "translate-x-0" : "-translate-x-full"
           }`}
           aria-label="Mobile navigation"
           aria-hidden={!open}
@@ -131,6 +141,17 @@ export default function Header() {
             </NavLink>
           ))}
 
+          {isAdmin && (
+            <Link
+              to="/admin"
+              onClick={closeMenu}
+              tabIndex={open ? 0 : -1}
+              className="border-b border-slate-100 py-3.5 text-sm font-bold text-ocean transition hover:text-ocean-dark lg:hidden"
+            >
+              Dashboard
+            </Link>
+          )}
+
           <Link
             to="/contact"
             onClick={closeMenu}
@@ -145,7 +166,7 @@ export default function Header() {
         {open && (
           <button
             type="button"
-            className="fixed inset-0 z-10 cursor-default bg-navy/55 lg:hidden"
+            className="fixed inset-0 z-10 cursor-default bg-navy/55 xl:hidden"
             aria-label="Close navigation"
             onClick={closeMenu}
           />

@@ -15,7 +15,7 @@ export default function AdminLogin() {
 
   if (checking)
     return (
-      <div className="grid min-h-screen place-items-center text-sm text-slate-600">
+      <div className="grid min-h-[calc(100vh-68px)] place-items-center px-4 pt-[68px] text-sm text-slate-600">
         Checking admin session…
       </div>
     );
@@ -40,7 +40,7 @@ export default function AdminLogin() {
   }
 
   return (
-    <main className="grid min-h-screen place-items-center bg-slate-100 px-4 py-10">
+    <main className="grid min-h-[calc(100vh-68px)] place-items-center bg-slate-100 px-4 pb-12 pt-24">
       <section className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-lg sm:p-8">
         <div className="mb-7 text-center">
           <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-blue-50 text-2xl text-[#2B4593]">

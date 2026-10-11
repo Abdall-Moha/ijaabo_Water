@@ -37,7 +37,7 @@ export default function AdminOrders() {
   const [toDate, setToDate] = useState("");
   const [page, setPage] = useState(1);
   const [viewing, setViewing] = useState(null);
-  const [notice, setNotice] = useState("");
+  const [notice, setNotice] = useState(null);
   const [savingId, setSavingId] = useState("");
 
   const loadOrders = useCallback(async () => {
@@ -80,7 +80,7 @@ export default function AdminOrders() {
 
   async function changeStatus(order, newStatus) {
     setSavingId(order._id);
-    setNotice("");
+    setNotice(null);
     try {
       const { data } = await api.put(`/orders/${order._id}/status`, {
         status: newStatus,
@@ -88,11 +88,12 @@ export default function AdminOrders() {
       setOrders((current) =>
         current.map((item) => (item._id === order._id ? data : item)),
       );
-      setNotice("Order status updated.");
+      setNotice({ tone: "success", text: "Order status updated." });
     } catch (saveError) {
-      setNotice(
-        saveError.response?.data?.message || "Could not update order status.",
-      );
+      setNotice({
+        tone: "error",
+        text: saveError.response?.data?.message || "Could not update order status.",
+      });
     } finally {
       setSavingId("");
     }
@@ -105,16 +106,17 @@ export default function AdminOrders() {
       )
     )
       return;
-    setNotice("");
+    setNotice(null);
     try {
       await api.delete(`/orders/${order._id}`);
       setOrders((current) => current.filter((item) => item._id !== order._id));
-      setNotice("Order deleted.");
+      setNotice({ tone: "success", text: "Order deleted." });
       setViewing(null);
     } catch (deleteError) {
-      setNotice(
-        deleteError.response?.data?.message || "Could not delete order.",
-      );
+      setNotice({
+        tone: "error",
+        text: deleteError.response?.data?.message || "Could not delete order.",
+      });
     }
   }
 
@@ -128,7 +130,7 @@ export default function AdminOrders() {
       />
       {notice && (
         <div className="mb-4">
-          <Notice tone="success">{notice}</Notice>
+          <Notice tone={notice.tone}>{notice.text}</Notice>
         </div>
       )}
       {error && (
@@ -235,19 +237,23 @@ export default function AdminOrders() {
                         {dateLabel(order.createdAt)}
                       </td>
                       <td className="px-3 py-3">
-                        <select
-                          aria-label={`Status for ${order.fullName}`}
-                          disabled={savingId === order._id}
-                          className="rounded-lg border border-slate-300 px-2 py-2 text-xs"
-                          value={order.status}
-                          onChange={(event) =>
-                            changeStatus(order, event.target.value)
-                          }
-                        >
-                          {statuses.map((value) => (
-                            <option key={value}>{value}</option>
-                          ))}
-                        </select>
+                        {order.status === "DELIVERED" ? (
+                          <StatusTag value={order.status} />
+                        ) : (
+                          <select
+                            aria-label={`Status for ${order.fullName}`}
+                            disabled={savingId === order._id}
+                            className="rounded-lg border border-slate-300 px-2 py-2 text-xs"
+                            value={order.status}
+                            onChange={(event) =>
+                              changeStatus(order, event.target.value)
+                            }
+                          >
+                            {statuses.map((value) => (
+                              <option key={value}>{value}</option>
+                            ))}
+                          </select>
+                        )}
                       </td>
                       <td className="px-3 py-3">
                         <div className="flex gap-1">
