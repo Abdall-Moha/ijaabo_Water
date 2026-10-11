@@ -99,7 +99,9 @@ export default function AdminOverview() {
             className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5"
           >
             <div className="flex items-start justify-between gap-2">
-              <p className="min-w-0 text-xs font-medium leading-5 text-slate-600 sm:text-sm">{label}</p>
+              <p className="min-w-0 text-xs font-medium leading-5 text-slate-600 sm:text-sm">
+                {label}
+              </p>
               <Icon className="shrink-0 text-lg text-[#2B4593] sm:text-xl" />
             </div>
             <p className="mt-3 break-words text-xl font-bold text-slate-900 sm:text-3xl">

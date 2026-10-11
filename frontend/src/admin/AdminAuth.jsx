@@ -4,12 +4,17 @@ import { AdminAuthContext } from "./AdminAuthContext.js";
 
 export function AdminAuthProvider({ children }) {
   const [admin, setAdmin] = useState(null);
-  const [checking, setChecking] = useState(() => Boolean(sessionStorage.getItem("ijaaboAdminToken")));
+  const [checking, setChecking] = useState(() =>
+    Boolean(sessionStorage.getItem("ijaaboAdminToken")),
+  );
 
   useEffect(() => {
     let active = true;
     const token = sessionStorage.getItem("ijaaboAdminToken");
-    if (!token) return () => { active = false; };
+    if (!token)
+      return () => {
+        active = false;
+      };
 
     api
       .get("/auth/me")

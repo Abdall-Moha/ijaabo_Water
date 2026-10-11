@@ -50,8 +50,12 @@ export default function AdminProducts() {
   }, []);
   useEffect(() => {
     let active = true;
-    Promise.resolve().then(() => { if (active) loadProducts(); });
-    return () => { active = false; };
+    Promise.resolve().then(() => {
+      if (active) loadProducts();
+    });
+    return () => {
+      active = false;
+    };
   }, [loadProducts]);
 
   const filtered = useMemo(

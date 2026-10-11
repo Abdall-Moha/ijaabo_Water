@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
@@ -34,7 +33,6 @@ export default function Header() {
       {/* Fixed header */}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white">
         <div className="relative mx-auto flex h-[68px] w-[calc(100%-2rem)] max-w-[1200px] items-center justify-between px-0 sm:w-[calc(100%-3rem)]">
-
           {/* Logo on the left */}
           <div className="relative z-30 shrink-0">
             <Brand />
@@ -75,7 +73,10 @@ export default function Header() {
           {/* Desktop actions */}
           <div className="ml-auto hidden shrink-0 items-center gap-2 lg:flex">
             {isAdmin && (
-              <Link to="/admin" className="inline-flex h-10 items-center justify-center rounded-md border border-slate-200 px-3 text-[13px] font-bold text-ocean transition hover:border-ocean hover:bg-sky-50">
+              <Link
+                to="/admin"
+                className="inline-flex h-10 items-center justify-center rounded-md border border-slate-200 px-3 text-[13px] font-bold text-ocean transition hover:border-ocean hover:bg-sky-50"
+              >
                 Dashboard
               </Link>
             )}

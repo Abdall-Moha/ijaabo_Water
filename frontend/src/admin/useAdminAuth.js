@@ -3,6 +3,7 @@ import { AdminAuthContext } from "./AdminAuthContext.js";
 
 export function useAdminAuth() {
   const context = useContext(AdminAuthContext);
-  if (!context) throw new Error("useAdminAuth must be used within AdminAuthProvider");
+  if (!context)
+    throw new Error("useAdminAuth must be used within AdminAuthProvider");
   return context;
 }

@@ -10,12 +10,24 @@
 }
 
 @layer base {
-  * { @apply box-border; }
-  html { @apply min-w-[320px] scroll-smooth; }
-  body { @apply m-0 min-w-[320px] bg-white font-sans text-slate-800 antialiased; }
-  a { @apply text-inherit no-underline; }
-  ::selection { @apply bg-sky-100 text-navy; }
+  * {
+    @apply box-border;
+  }
+  html {
+    @apply min-w-[320px] scroll-smooth;
+  }
+  body {
+    @apply m-0 min-w-[320px] bg-white font-sans text-slate-800 antialiased;
+  }
+  a {
+    @apply text-inherit no-underline;
+  }
+  ::selection {
+    @apply bg-sky-100 text-navy;
+  }
 }
 
 /* Keep the page behind the fixed mobile navigation from scrolling. */
-body.menu-open { @apply overflow-hidden; }
+body.menu-open {
+  @apply overflow-hidden;
+}

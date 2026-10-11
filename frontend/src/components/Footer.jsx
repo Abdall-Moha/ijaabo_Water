@@ -45,7 +45,10 @@ export default function Footer() {
             households, businesses, institutions, and communities across Somalia
             since 2012.
           </p>
-          <a className="inline-flex items-center gap-2 text-sm text-white hover:text-gold focus-visible:outline-2 focus-visible:outline-gold" href="tel:2828">
+          <a
+            className="inline-flex items-center gap-2 text-sm text-white hover:text-gold focus-visible:outline-2 focus-visible:outline-gold"
+            href="tel:2828"
+          >
             Call center: <b>2828</b>
           </a>
         </div>
@@ -53,7 +56,11 @@ export default function Footer() {
           <div className="flex flex-col items-start gap-3" key={heading}>
             <h3 className="mb-1 text-sm font-bold text-white">{heading}</h3>
             {links.map(([label, path]) => (
-              <Link className="text-xs text-slate-300 transition hover:text-white sm:text-sm" to={path} key={label}>
+              <Link
+                className="text-xs text-slate-300 transition hover:text-white sm:text-sm"
+                to={path}
+                key={label}
+              >
                 {label}
               </Link>
             ))}
@@ -61,18 +68,36 @@ export default function Footer() {
         ))}
         <div className="flex flex-col items-start gap-2">
           <h3 className="mb-1 text-sm font-bold text-white">Contact</h3>
-          <span className="mt-1 text-[11px] uppercase tracking-wider text-slate-400">Call center</span>
-          <a className="text-sm text-white hover:text-gold" href="tel:2828">2828</a>
-          <span className="mt-1 text-[11px] uppercase tracking-wider text-slate-400">Email</span>
-          <a className="text-sm text-white hover:text-gold" href="mailto:info@ijaabo.com">info@ijaabo.com</a>
-          <span className="mt-1 text-[11px] uppercase tracking-wider text-slate-400">Location</span>
+          <span className="mt-1 text-[11px] uppercase tracking-wider text-slate-400">
+            Call center
+          </span>
+          <a className="text-sm text-white hover:text-gold" href="tel:2828">
+            2828
+          </a>
+          <span className="mt-1 text-[11px] uppercase tracking-wider text-slate-400">
+            Email
+          </span>
+          <a
+            className="text-sm text-white hover:text-gold"
+            href="mailto:info@ijaabo.com"
+          >
+            info@ijaabo.com
+          </a>
+          <span className="mt-1 text-[11px] uppercase tracking-wider text-slate-400">
+            Location
+          </span>
           <p className="m-0 text-sm text-white">Mogadishu, Somalia</p>
         </div>
       </div>
       <div className="mx-auto flex w-[calc(100%-2.25rem)] max-w-[1200px] flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-white/15 py-4 text-[10px] text-slate-400 sm:w-[calc(100%-3rem)] sm:text-xs">
         <span>© {currentYear} Ijaabo Water. All rights reserved.</span>
         <span>Pure water. Better tomorrow.</span>
-        <Link className="text-slate-400 transition hover:text-slate-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold" to="/admin-login">Admin Login</Link>
+        <Link
+          className="text-slate-400 transition hover:text-slate-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+          to="/admin-login"
+        >
+          Admin Login
+        </Link>
       </div>
     </footer>
   );

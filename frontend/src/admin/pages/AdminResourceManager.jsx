@@ -75,8 +75,12 @@ export default function AdminResourceManager({ type }) {
   }, [config.listUrl, config.title]);
   useEffect(() => {
     let active = true;
-    Promise.resolve().then(() => { if (active) load(); });
-    return () => { active = false; };
+    Promise.resolve().then(() => {
+      if (active) load();
+    });
+    return () => {
+      active = false;
+    };
   }, [load]);
 
   const filtered = useMemo(
@@ -165,8 +169,7 @@ export default function AdminResourceManager({ type }) {
         action={
           <button className={buttonClass} onClick={create}>
             <FiPlus />
-            Add{" "}
-            {type === "reports" ? "report" : "partner"}
+            Add {type === "reports" ? "report" : "partner"}
           </button>
         }
       />
@@ -367,15 +370,15 @@ export default function AdminResourceManager({ type }) {
                     />
                   </label>
                   <label className="block text-sm font-semibold">
-                        Website
-                        <input
-                          className={fieldClass}
-                          type="url"
-                          value={form.website}
-                          onChange={(event) =>
-                            setForm({ ...form, website: event.target.value })
-                          }
-                        />
+                    Website
+                    <input
+                      className={fieldClass}
+                      type="url"
+                      value={form.website}
+                      onChange={(event) =>
+                        setForm({ ...form, website: event.target.value })
+                      }
+                    />
                   </label>
                   <label className="flex items-center gap-2 text-sm font-semibold">
                     <input
@@ -390,17 +393,15 @@ export default function AdminResourceManager({ type }) {
                 </>
               )}
               <label className="block text-sm font-semibold">
-                  {config.fileLabel}
-                  {type === "reports" && " *"}
-                  <input
-                    className={`${fieldClass} py-2`}
-                    type="file"
-                    accept={config.accept}
-                    required={type === "reports" && editor === "new"}
-                    onChange={(event) =>
-                      setFile(event.target.files?.[0] || null)
-                    }
-                  />
+                {config.fileLabel}
+                {type === "reports" && " *"}
+                <input
+                  className={`${fieldClass} py-2`}
+                  type="file"
+                  accept={config.accept}
+                  required={type === "reports" && editor === "new"}
+                  onChange={(event) => setFile(event.target.files?.[0] || null)}
+                />
               </label>
               {file && type === "partners" && (
                 <img

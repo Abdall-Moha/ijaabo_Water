@@ -1,12 +1,5 @@
-
 import { useEffect, useMemo, useState } from "react";
-import {
-  FiMail,
-  FiMapPin,
-  FiPhone,
-  FiMinus,
-  FiPlus,
-} from "react-icons/fi";
+import { FiMail, FiMapPin, FiPhone, FiMinus, FiPlus } from "react-icons/fi";
 import { api } from "../services/api.js";
 
 const requestedProducts = [
@@ -210,7 +203,7 @@ export default function Contact() {
   }
 
   return (
-<main className="flex min-h-[calc(100vh-80px)] items-center justify-center px-4 pt-24 pb-12 sm:px-6 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-16">
+    <main className="flex min-h-[calc(100vh-80px)] items-center justify-center px-4 pt-24 pb-12 sm:px-6 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-16">
       <div className="mx-auto grid w-full max-w-[1120px] items-start gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
         {/* Contact information */}
         <section className="h-fit rounded-2xl bg-slate-50 p-6 sm:p-8">
@@ -224,8 +217,7 @@ export default function Contact() {
             </h1>
 
             <p className="mx-auto mt-4 max-w-sm text-sm leading-7 text-slate-600">
-              Contact our team for orders, partnerships, and delivery
-              questions.
+              Contact our team for orders, partnerships, and delivery questions.
             </p>
           </div>
 
@@ -363,18 +355,16 @@ export default function Contact() {
 
               {productsError && (
                 <p className="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-900">
-                  Product availability could not be loaded. Please refresh
-                  and try again.
+                  Product availability could not be loaded. Please refresh and
+                  try again.
                 </p>
               )}
 
-              {!productsLoading &&
-                !productsError &&
-                products.length === 0 && (
-                  <p className="mt-4 rounded-lg bg-slate-100 p-3 text-sm text-slate-700">
-                    No products are currently available.
-                  </p>
-                )}
+              {!productsLoading && !productsError && products.length === 0 && (
+                <p className="mt-4 rounded-lg bg-slate-100 p-3 text-sm text-slate-700">
+                  No products are currently available.
+                </p>
+              )}
 
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 {requestedProducts.map((name) => {
@@ -455,18 +445,14 @@ export default function Contact() {
                 <h3 className="font-bold text-navy">Order summary</h3>
 
                 <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-ocean">
-                  {selected.length}{" "}
-                  {selected.length === 1 ? "item" : "items"}
+                  {selected.length} {selected.length === 1 ? "item" : "items"}
                 </span>
               </div>
 
               {selected.length > 0 ? (
                 <ul className="mt-4 space-y-3 text-sm text-slate-700">
                   {selected.map((item) => (
-                    <li
-                      key={item.label}
-                      className="flex justify-between gap-3"
-                    >
+                    <li key={item.label} className="flex justify-between gap-3">
                       <span>{item.label}</span>
                       <span className="font-semibold">{item.quantity}</span>
                     </li>

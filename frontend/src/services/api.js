@@ -1,4 +1,3 @@
-
 import axios from "axios";
 
 // Get the backend URL from the frontend .env file
@@ -24,7 +23,10 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401 && !error.config?.url?.includes("/auth/login")) {
+    if (
+      error.response?.status === 401 &&
+      !error.config?.url?.includes("/auth/login")
+    ) {
       sessionStorage.removeItem("ijaaboAdminToken");
       window.dispatchEvent(new Event("ijaabo:admin-session-expired"));
     }

@@ -55,8 +55,12 @@ export default function AdminOrders() {
   }, []);
   useEffect(() => {
     let active = true;
-    Promise.resolve().then(() => { if (active) loadOrders(); });
-    return () => { active = false; };
+    Promise.resolve().then(() => {
+      if (active) loadOrders();
+    });
+    return () => {
+      active = false;
+    };
   }, [loadOrders]);
 
   const filtered = useMemo(
@@ -92,7 +96,8 @@ export default function AdminOrders() {
     } catch (saveError) {
       setNotice({
         tone: "error",
-        text: saveError.response?.data?.message || "Could not update order status.",
+        text:
+          saveError.response?.data?.message || "Could not update order status.",
       });
     } finally {
       setSavingId("");

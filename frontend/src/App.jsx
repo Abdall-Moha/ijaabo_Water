@@ -36,9 +36,9 @@ function AdminNotFound() {
 export default function App() {
   const { pathname } = useLocation();
 
-useEffect(() => {
-  window.scrollTo(0, 0);
-}, [pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   const isDashboardPage =
     pathname === "/admin" || pathname.startsWith("/admin/");
 

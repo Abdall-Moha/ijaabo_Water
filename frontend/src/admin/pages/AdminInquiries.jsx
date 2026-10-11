@@ -41,8 +41,12 @@ export default function AdminInquiries() {
   }, []);
   useEffect(() => {
     let active = true;
-    Promise.resolve().then(() => { if (active) load(); });
-    return () => { active = false; };
+    Promise.resolve().then(() => {
+      if (active) load();
+    });
+    return () => {
+      active = false;
+    };
   }, [load]);
 
   const filtered = useMemo(
@@ -75,7 +79,9 @@ export default function AdminInquiries() {
     } catch (saveError) {
       setNotice({
         tone: "error",
-        text: saveError.response?.data?.message || "Could not update inquiry status.",
+        text:
+          saveError.response?.data?.message ||
+          "Could not update inquiry status.",
       });
     } finally {
       setSavingId("");
@@ -98,7 +104,8 @@ export default function AdminInquiries() {
     } catch (deleteError) {
       setNotice({
         tone: "error",
-        text: deleteError.response?.data?.message || "Could not delete inquiry.",
+        text:
+          deleteError.response?.data?.message || "Could not delete inquiry.",
       });
     }
   }
