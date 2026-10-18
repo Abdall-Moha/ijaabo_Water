@@ -106,8 +106,8 @@ const dateLabel = (value) =>
         day: "numeric",
       }).format(new Date(value))
     : "Date not provided";
-const eyebrow = "text-xs font-bold tracking-[0.16em] text-ocean";
-const heading = "mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl";
+const eyebrow = "text-xs font-bold tracking-[0.16em] text-sky-100";
+const heading = "mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl";
 
 export default function QualitySafety() {
   const [reports, setReports] = useState([]);
@@ -238,24 +238,24 @@ export default function QualitySafety() {
   );
   return (
     <main>
-      <section className="bg-slate-50 px-5 py-16 text-center sm:py-20 lg:py-24">
+      <section className="mb-3 rounded-b-[2rem] bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-16 text-center sm:py-20 lg:py-24">
         <div className="mx-auto max-w-4xl">
           <span className={eyebrow}>Quality &amp; Safety</span>
-          <h1 className="mt-4 text-4xl font-bold tracking-tight text-navy sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
             Every Drop. Independently Tested.
           </h1>
-          <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-sky-100 sm:text-lg">
             Ijaabo Water's rigorous quality assurance process ensures every
             bottle meets international drinking water safety standards — from
             source to your hands.
           </p>
         </div>
       </section>
-      <section className="mx-auto max-w-[1200px] px-5 py-14 sm:py-16 lg:py-20">
+      <section id="purification-process" className="mx-auto my-3 max-w-[1200px] rounded-3xl bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16 lg:py-20">
         <header className="mx-auto mb-9 max-w-3xl text-center">
           <span className={eyebrow}>Our Purification Process</span>
           <h2 className={heading}>The Ijaabo 9-Step Purification Process</h2>
-          <p className="mt-4 text-base leading-7 text-slate-600">
+          <p className="mt-4 text-base leading-7 text-sky-100">
             Every drop passes through nine precise purification stages — from
             raw source water to a sealed, safe, great-tasting bottle.
           </p>
@@ -280,12 +280,12 @@ export default function QualitySafety() {
           ))}
         </div>
       </section>
-      <section className="bg-slate-50 px-5 py-14 sm:py-16">
+      <section id="compliance" className="my-7 bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16">
         <div className="mx-auto max-w-[1200px]">
           <header className="mx-auto mb-9 max-w-3xl text-center">
             <span className={eyebrow}>Standards</span>
             <h2 className={heading}>Compliance &amp; Certification</h2>
-            <p className="mt-4 text-base leading-7 text-slate-600">
+            <p className="mt-4 text-base leading-7 text-sky-100">
               Our water quality processes are benchmarked against international
               drinking water safety standards.
             </p>
@@ -306,19 +306,19 @@ export default function QualitySafety() {
           </div>
         </div>
       </section>
-      <section className="mx-auto max-w-[1000px] px-5 py-14 sm:py-16">
+      <section id="latest-report" className="mx-auto my-3 max-w-[1000px] rounded-3xl bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16">
         <header className="mb-8 text-center">
           <span className={eyebrow}>Latest Report</span>
           <h2 className={heading}>Download Our Latest Quality Report</h2>
         </header>
         {latestContent}
       </section>
-      <section className="bg-slate-50 px-5 py-14 sm:py-16">
+      <section id="report-archive" className="my-3 rounded-[2rem] bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16">
         <div className="mx-auto max-w-[1100px]">
           <header className="mb-8 text-center">
             <span className={eyebrow}>Report Archive</span>
             <h2 className={heading}>Historical Quality Reports</h2>
-            <p className="mt-4 text-base leading-7 text-slate-600">
+            <p className="mt-4 text-base leading-7 text-sky-100">
               Full transparency — access all historical water quality test
               reports.
             </p>
@@ -326,7 +326,7 @@ export default function QualitySafety() {
           {reportContent}
         </div>
       </section>
-      <section className="mx-auto max-w-4xl px-5 py-14 sm:py-16">
+      <section id="faq" className="mx-auto my-3 max-w-4xl rounded-3xl bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16">
         <header className="mb-8 text-center">
           <span className={eyebrow}>FAQ</span>
           <h2 className={heading}>Quality Questions Answered</h2>
@@ -348,8 +348,8 @@ export default function QualitySafety() {
           ))}
         </div>
       </section>
-      <section className="px-5 pb-14">
-        <div className="mx-auto flex max-w-5xl flex-col items-center rounded-2xl bg-navy px-6 py-10 text-center text-white sm:px-10">
+      <section className="my-3 mx-10 rounded-[2rem] bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 pb-14">
+        <div className="mx-auto flex max-w-5xl flex-col items-center rounded-2xl bg-[linear-gradient(rgba(0,72,150,0.92),rgba(0,88,188,0.88)),url('/home-water-splash.png')] bg-cover bg-[center_65%] px-6 py-10 text-center text-white sm:px-10">
           <h2 className="text-3xl font-bold sm:text-4xl">
             Need more information?
           </h2>
@@ -358,7 +358,7 @@ export default function QualitySafety() {
             available reports.
           </p>
           <Link
-            className="mt-6 rounded-md bg-gold px-6 py-3 font-bold text-navy hover:bg-amber-300"
+            className="mt-6 rounded-md bg-[#ffdf65] px-6 py-3 font-bold text-[#073d73] transition hover:bg-[#ffe98f]"
             to="/contact"
           >
             Contact Ijaabo

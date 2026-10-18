@@ -75,30 +75,30 @@ const programs = [
 export default function Impact() {
   return (
     <main>
-      <section className="bg-slate-50 px-5 py-16 text-center sm:py-20 lg:py-24">
+      <section className="mb-3 rounded-b-[1rem] bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-16 text-center sm:py-20 lg:py-24">
         <div className="mx-auto max-w-4xl">
-          <span className="text-xs font-bold tracking-[0.16em] text-ocean">
+          <span className="text-xs font-bold tracking-[0.16em] text-sky-100">
             Impact &amp; Sustainability
           </span>
-          <h1 className="mt-4 text-4xl font-bold tracking-tight text-navy sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
             Clean Water. Stronger Communities. Greener Somalia.
           </h1>
-          <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-sky-100 sm:text-lg">
             Ijaabo Water is not just a water company — we are a force for social
             progress, environmental responsibility, and community resilience
             across Somalia.
           </p>
         </div>
       </section>
-      <section className="mx-auto max-w-[1200px] px-5 py-14 sm:py-16">
+      <section id="impact-programs" className="mx-auto my-3 max-w-[1200px] rounded-3xl bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16">
         <header className="mx-auto mb-9 max-w-3xl text-center">
-          <span className="text-xs font-bold tracking-[0.14em] text-ocean">
+          <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
             What We're Doing
           </span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Our Impact Programs
           </h2>
-          <p className="mt-4 text-base leading-7 text-slate-600">
+          <p className="mt-4 text-base leading-7 text-sky-100">
             From clean water infrastructure to local employment, Ijaabo Water's
             impact goes beyond the bottle.
           </p>
@@ -130,21 +130,21 @@ export default function Impact() {
           ))}
         </div>
       </section>
-      <section className="bg-slate-50 px-5 py-14 sm:py-16">
+      <section id="climate" className="my-7 bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16">
         <div className="mx-auto grid max-w-[1200px] items-center gap-8 md:grid-cols-2 lg:gap-16">
           <div>
-            <span className="text-xs font-bold tracking-[0.14em] text-ocean">
+            <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
               Climate Responsibility
             </span>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Building a Climate-Resilient Water Future
             </h2>
-            <p className="mt-5 text-base leading-8 text-slate-600">
+            <p className="mt-5 text-base leading-8 text-sky-100">
               Water security and climate resilience are inseparable. Ijaabo
               Water's infrastructure and programs are designed to withstand and
               adapt to Somalia's changing climate conditions.
             </p>
-            <p className="mt-4 text-base leading-8 text-slate-600">
+            <p className="mt-4 text-base leading-8 text-sky-100">
               From energy-efficient treatment systems to community water storage
               designed for drought resilience — we are building water
               infrastructure that lasts.
@@ -158,7 +158,7 @@ export default function Impact() {
           />
         </div>
       </section>
-      <section className="bg-navy px-5 py-12 text-white sm:py-14">
+      <section className="my-3 mx-10 rounded-[2rem] bg-[linear-gradient(rgba(0,72,150,0.92),rgba(0,88,188,0.88)),url('/home-water-splash.png')] bg-cover bg-[center_65%] px-5 py-12 text-white sm:py-14">
         <div className="mx-auto grid max-w-[1200px] gap-4 sm:grid-cols-3">
           {stats.map(([value, label, Icon]) => (
             <article
@@ -174,18 +174,18 @@ export default function Impact() {
           ))}
         </div>
       </section>
-      <section className="px-5 pt-14 sm:pb-20">
-        <div className="mx-auto flex max-w-5xl flex-col items-center rounded-2xl bg-sky-50 px-6 py-10 text-center sm:px-10">
-          <h2 className="text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+      <section id="join-mission" className="my-3 rounded-[2rem] bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 pt-14 sm:pb-20">
+        <div className="mx-auto flex max-w-5xl flex-col items-center rounded-2xl bg-[linear-gradient(rgba(0,72,150,0.92),rgba(0,88,188,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-6 py-10 text-center sm:px-10">
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Join Our Mission for Cleaner, Stronger Communities
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
+          <p className="mt-4 max-w-2xl text-base leading-7 text-sky-100">
             Partner with Ijaabo Water to scale sustainable water access, create
             jobs, and build climate resilience across Somalia.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link
-              className="inline-flex min-h-12 items-center gap-2 rounded-md bg-ocean px-6 text-sm font-bold text-white hover:bg-ocean-dark"
+              className="inline-flex min-h-12 items-center gap-2 rounded-md bg-[#ffdf65] px-6 text-sm font-bold text-[#073d73] transition hover:bg-[#ffe98f]"
               to="/partners"
             >
               Become a Partner <FiArrowUpRight />

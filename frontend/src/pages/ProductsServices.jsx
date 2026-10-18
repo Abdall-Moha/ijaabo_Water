@@ -195,33 +195,33 @@ export default function ProductsServices() {
 
   return (
     <main>
-      <section className="bg-slate-50 px-5 py-16 text-center sm:py-20 lg:py-24">
+      <section className="mb-3 rounded-b-[2rem] bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-16 text-center sm:py-20 lg:py-24">
         <div className="mx-auto max-w-4xl">
-          <span className="text-xs font-bold tracking-[0.16em] text-ocean">
+          <span className="text-xs font-bold tracking-[0.16em] text-sky-100">
             PRODUCTS &amp; SERVICES
           </span>
-          <h1 className="mt-4 text-4xl leading-tight font-bold tracking-tight text-navy sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 text-4xl leading-tight font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
             Clean water in
             <br className="sm:hidden" />{" "}
-            <span className="text-water">every form.</span>
+            <span className="text-[#ffdf65]">every form.</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-sky-100 sm:text-lg">
             Bottled water, household supply, and institutional distribution —
             water solutions for individual customers and large organizations.
           </p>
         </div>
       </section>
 
-      <section className="px-5 py-14 sm:py-16 lg:py-20">
+      <section id="what-we-offer" className="my-3 rounded-[2rem] bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-[1200px]">
           <div className="mx-auto mb-9 max-w-3xl text-center">
-            <span className="text-xs font-bold tracking-[0.14em] text-ocean">
+            <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
               WHAT WE OFFER
             </span>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Comprehensive water solutions
             </h2>
-            <p className="mt-4 text-base leading-7 text-slate-600">
+            <p className="mt-4 text-base leading-7 text-sky-100">
               Ijaabo serves individual customers, families, businesses, and
               institutions with water supply services.
             </p>
@@ -254,23 +254,23 @@ export default function ProductsServices() {
 
       <section
         id="product-range"
-        className="bg-slate-50 px-5 py-14 sm:py-16 lg:py-20"
+        className="my-7 bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16 lg:py-20"
       >
         <div className="mx-auto max-w-[1200px]">
           <div className="mx-auto mb-9 max-w-3xl text-center">
-            <span className="text-xs font-bold tracking-[0.14em] text-ocean">
+            <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
               PRODUCT RANGE
             </span>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Ijaabo Water bottle sizes
             </h2>
-            <p className="mt-4 text-base leading-7 text-slate-600">
+            <p className="mt-4 text-base leading-7 text-sky-100">
               The company’s published range includes six sizes. Contact Ijaabo
               for current availability and ordering information.
             </p>
           </div>
           {loading && (
-            <p className="mb-5 text-center text-sm text-slate-500">
+            <p className="mb-5 text-center text-sm text-sky-100">
               Loading current product information…
             </p>
           )}
@@ -300,25 +300,25 @@ export default function ProductsServices() {
         </div>
       </section>
 
-      <section className="mx-auto grid w-[calc(100%-2.25rem)] max-w-[1200px] items-center gap-8 py-14 sm:w-[calc(100%-3rem)] sm:py-16 md:grid-cols-2 lg:gap-16 lg:py-20">
+      <section id="household-supply" className="mx-auto my-3 grid w-[calc(100%-2.25rem)] max-w-[1200px] items-center gap-8 rounded-3xl bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:w-[calc(100%-3rem)] sm:px-8 sm:py-16 md:grid-cols-2 lg:gap-16 lg:py-20">
         <div className="order-2 md:order-1">
-          <span className="text-xs font-bold tracking-[0.14em] text-ocean">
+          <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
             HOUSEHOLD SUPPLY
           </span>
-          <h2 className="mt-3 text-3xl leading-tight font-bold tracking-tight text-navy sm:text-4xl">
+          <h2 className="mt-3 text-3xl leading-tight font-bold tracking-tight text-white sm:text-4xl">
             Clean water, delivered to your door.
           </h2>
-          <p className="mt-4 text-base leading-8 text-slate-600">
+          <p className="mt-4 text-base leading-8 text-sky-100">
             Ijaabo describes its household service as structured water access
             for families and neighborhoods, with subscription-based and metered
             supply models designed for reliable and fair access.
           </p>
-          <p className="mt-3 text-base leading-8 text-slate-600">
+          <p className="mt-3 text-base leading-8 text-sky-100">
             The company says it is continuing to expand access beyond its
             current coverage through stronger infrastructure and distribution.
           </p>
           <Link
-            className="mt-6 inline-flex min-h-12 items-center justify-center rounded-md bg-ocean px-6 text-sm font-bold text-white hover:bg-ocean-dark"
+            className="mt-6 inline-flex min-h-12 items-center justify-center rounded-md bg-[#ffdf65] px-6 text-sm font-bold text-[#073d73] transition hover:bg-[#ffe98f]"
             to="/contact"
           >
             Ask about household supply
@@ -334,16 +334,16 @@ export default function ProductsServices() {
         </div>
       </section>
 
-      <section className="bg-slate-50 px-5 py-14 sm:py-16 lg:py-20">
+      <section id="bulk-institutional" className="my-7 bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-[1200px]">
           <div className="mx-auto mb-9 max-w-3xl text-center">
-            <span className="text-xs font-bold tracking-[0.14em] text-ocean">
+            <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
               BULK &amp; INSTITUTIONAL
             </span>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Supply for organizations and communities
             </h2>
-            <p className="mt-4 text-base leading-7 text-slate-600">
+            <p className="mt-4 text-base leading-7 text-sky-100">
               Ijaabo lists supply services for a range of business, public, and
               community customers.
             </p>
@@ -368,7 +368,7 @@ export default function ProductsServices() {
           </div>
           <div className="mt-8 text-center">
             <Link
-              className="inline-flex min-h-12 items-center justify-center rounded-md bg-ocean px-6 text-sm font-bold text-white hover:bg-ocean-dark"
+              className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#ffdf65] px-6 text-sm font-bold text-[#073d73] transition hover:bg-[#ffe98f]"
               to="/contact"
             >
               Discuss a supply request

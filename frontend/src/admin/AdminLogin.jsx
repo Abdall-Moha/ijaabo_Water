@@ -15,7 +15,7 @@ export default function AdminLogin() {
 
   if (checking)
     return (
-      <div className="grid min-h-[calc(100vh-68px)] place-items-center px-4 pt-[68px] text-sm text-slate-600">
+      <div className="grid min-h-[calc(100vh-68px)] place-items-center bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-4 pt-[68px] text-sm text-sky-100">
         Checking admin session…
       </div>
     );
@@ -40,21 +40,21 @@ export default function AdminLogin() {
   }
 
   return (
-    <main className="grid min-h-[calc(100vh-68px)] place-items-center bg-slate-100 px-4 pb-12 pt-24">
-      <section className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-lg sm:p-8">
+    <main className="grid min-h-[calc(100vh-68px)] place-items-center bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-4 pb-12 pt-24">
+      <section className="w-full max-w-md rounded-2xl border border-white/60 bg-white p-6 shadow-2xl shadow-[#003d62]/30 sm:p-8">
         <div className="mb-7 text-center">
-          <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-blue-50 text-2xl text-[#2B4593]">
+          <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-sky-50 text-2xl text-[#0875ce]">
             <FiDroplet />
           </span>
-          <h1 className="mt-4 text-2xl font-bold text-slate-900">
+          <h1 className="mt-4 text-2xl font-bold tracking-tight text-navy">
             Ijaabo Admin
           </h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-slate-600">
             Sign in to manage your website
           </p>
         </div>
         <form className="space-y-5" onSubmit={submit}>
-          <label className="block text-sm font-semibold text-slate-700">
+          <label className="block text-sm font-semibold text-navy">
             Email
             <input
               className={fieldClass}
@@ -65,7 +65,7 @@ export default function AdminLogin() {
               required
             />
           </label>
-          <label className="block text-sm font-semibold text-slate-700">
+          <label className="block text-sm font-semibold text-navy">
             Password
             <span className="relative mt-1.5 block">
               <input
@@ -77,7 +77,7 @@ export default function AdminLogin() {
                 required
               />
               <button
-                className="absolute inset-y-0 right-0 grid w-11 place-items-center text-slate-500"
+                className="absolute inset-y-0 right-0 grid w-11 place-items-center text-slate-500 transition hover:text-[#0875ce] focus-visible:outline-2 focus-visible:outline-[#0875ce]"
                 type="button"
                 aria-label={showPassword ? "Hide password" : "Show password"}
                 onClick={() => setShowPassword(!showPassword)}
@@ -88,7 +88,7 @@ export default function AdminLogin() {
           </label>
           {error && <Notice>{error}</Notice>}
           <button
-            className="min-h-12 w-full rounded-lg bg-[#2B4593] px-4 font-semibold text-white hover:bg-blue-900 disabled:opacity-60"
+            className="min-h-12 w-full rounded-lg bg-[#0875ce] px-4 font-semibold text-white transition hover:bg-[#0066be] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0875ce] disabled:opacity-60"
             type="submit"
             disabled={busy}
           >

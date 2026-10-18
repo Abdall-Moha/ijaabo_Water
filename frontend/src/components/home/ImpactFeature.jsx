@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function ImpactFeature() {
   return (
-    <section className="bg-ocean-dark py-12 text-white sm:py-14 lg:py-16">
+    <section id="community-impact" className="my-3 mx-10 rounded-[2rem] bg-[linear-gradient(rgba(0,72,150,0.92),rgba(0,88,188,0.88)),url('/home-water-splash.png')] bg-cover bg-[center_65%] py-12 text-white sm:py-14 lg:py-16">
       <div className="mx-auto grid w-[calc(100%-2.25rem)] max-w-[1200px] items-center gap-6 sm:w-[calc(100%-3rem)] md:grid-cols-[56px_1fr_220px] md:gap-7">
         <div className="grid size-12 place-items-center rounded-full border border-white/30 text-2xl text-gold sm:size-14"><FiUsers aria-hidden="true" /></div>
         <div>

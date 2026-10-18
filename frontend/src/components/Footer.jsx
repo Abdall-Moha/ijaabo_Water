@@ -36,7 +36,7 @@ const currentYear = new Date().getFullYear();
 
 export default function Footer() {
   return (
-    <footer className="bg-[#072a45] text-slate-200">
+    <footer className="bg-[linear-gradient(rgba(0,88,188,0.94),rgba(0,102,190,0.96)),url('/home-water-splash.png')] bg-cover bg-[center_58%] text-slate-200">
       <div className="mx-auto grid w-[calc(100%-2.25rem)] max-w-[1200px] grid-cols-2 gap-x-5 gap-y-8 py-9 sm:w-[calc(100%-3rem)] md:grid-cols-3 md:gap-7 md:py-12 xl:grid-cols-[1.65fr_repeat(3,.85fr)_1fr]">
         <div className="col-span-2 md:row-span-2 xl:col-span-1 xl:row-span-1">
           <Brand light />

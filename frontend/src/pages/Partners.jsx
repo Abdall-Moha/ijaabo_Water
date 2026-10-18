@@ -114,7 +114,7 @@ const partnershipBenefits = [
 const inputClass =
   "mt-2 min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-ocean focus:ring-2 focus:ring-sky-100";
 const titleClass =
-  "mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl";
+  "mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl";
 
 export default function Partners() {
   const [partners, setPartners] = useState([]);
@@ -187,15 +187,15 @@ export default function Partners() {
 
   return (
     <main>
-      <section className="bg-slate-50 px-5 py-16 text-center sm:py-20 lg:py-24">
+      <section className="mb-3 rounded-b-[2rem] bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-16 text-center sm:py-20 lg:py-24">
         <div className="mx-auto max-w-4xl">
-          <span className="text-xs font-bold tracking-[0.16em] text-ocean">
+          <span className="text-xs font-bold tracking-[0.16em] text-sky-100">
             Partners &amp; Clients
           </span>
-          <h1 className="mt-4 text-4xl font-bold tracking-tight text-navy sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
             Build a Stronger Somalia, Together
           </h1>
-          <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-sky-100 sm:text-lg">
             Partner with Ijaabo Water to expand clean water access, support
             vulnerable communities, and create lasting climate-resilient
             infrastructure.
@@ -203,13 +203,13 @@ export default function Partners() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1200px] px-5 py-14 sm:py-16">
+      <section id="partner-categories" className="mx-auto mt-10 max-w-[1200px] rounded-3xl bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16">
         <header className="mx-auto mb-9 max-w-3xl text-center">
-          <span className="text-xs font-bold tracking-[0.14em] text-ocean">
+          <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
             Who We Work With
           </span>
           <h2 className={titleClass}>Partners &amp; Client Categories</h2>
-          <p className="mt-4 text-base leading-7 text-slate-600">
+          <p className="mt-4 text-base leading-7 text-sky-100">
             From development organizations to private businesses — Ijaabo Water
             builds structured partnerships with organizations that share our
             commitment to clean water and community impact.
@@ -233,14 +233,14 @@ export default function Partners() {
         </div>
       </section>
 
-      <section className="bg-slate-50 px-5 py-14 sm:py-16">
+      <section id="why-partner" className="my-7 bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16">
         <div className="mx-auto max-w-[1200px]">
           <header className="mx-auto mb-9 max-w-3xl text-center">
-            <span className="text-xs font-bold tracking-[0.14em] text-ocean">
+            <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
               Partnership Value
             </span>
             <h2 className={titleClass}>Why Partner With Ijaabo Water?</h2>
-            <p className="mt-4 text-base leading-7 text-slate-600">
+            <p className="mt-4 text-base leading-7 text-sky-100">
               A partnership with Ijaabo Water is a partnership with a
               mission-driven company committed to clean water access, community
               impact, and sustainable development in Somalia.
@@ -265,20 +265,20 @@ export default function Partners() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1200px] px-5 py-14 sm:py-16">
+      <section id="our-partners" className="mx-auto my-3 max-w-[1200px] rounded-3xl bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16">
         <header className="mx-auto mb-8 max-w-3xl text-center">
-          <span className="text-xs font-bold tracking-[0.14em] text-ocean">
+          <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
             Our Partners
           </span>
           <h2 className={titleClass}>Trusted by Leading Organizations</h2>
-          <p className="mt-4 text-base leading-7 text-slate-600">
+          <p className="mt-4 text-base leading-7 text-sky-100">
             Ijaabo Water partners with development organizations, institutions,
             businesses, and community organizations committed to clean water
             access.
           </p>
         </header>
         {loadingPartners ? (
-          <p className="rounded-2xl border border-slate-200 p-8 text-center text-slate-600">
+          <p className="rounded-2xl border border-slate-200 bg-white p-8 text-center text-slate-600">
             Loading partners…
           </p>
         ) : partnersError ? (
@@ -310,14 +310,14 @@ export default function Partners() {
         )}
       </section>
 
-      <section className="bg-slate-50 px-5 py-14 sm:py-16">
+      <section id="partner-with-us" className="my-7 bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16">
         <div className="mx-auto max-w-3xl">
           <header className="mb-8 text-center">
-            <span className="text-xs font-bold tracking-[0.14em] text-ocean">
+            <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
               Partner With Us
             </span>
             <h2 className={titleClass}>Start a Partnership Conversation</h2>
-            <p className="mt-4 text-base leading-7 text-slate-600">
+            <p className="mt-4 text-base leading-7 text-sky-100">
               Tell us about your organization and water supply needs — our
               partnerships team will respond within 2 business days.
             </p>
@@ -406,8 +406,8 @@ export default function Partners() {
         </div>
       </section>
 
-      <section className="px-5 py-14">
-        <div className="mx-auto flex max-w-5xl flex-col items-center rounded-2xl bg-navy px-6 py-10 text-center text-white sm:px-10">
+      <section className="my-3 rounded-[2rem] bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14">
+        <div className="mx-auto flex max-w-5xl flex-col items-center rounded-2xl bg-[linear-gradient(rgba(0,72,150,0.92),rgba(0,88,188,0.88)),url('/home-water-splash.png')] bg-cover bg-[center_65%] px-6 py-10 text-center text-white sm:px-10">
           <h2 className="text-3xl font-bold sm:text-4xl">
             Ready to Scale Clean Water Access Together?
           </h2>
@@ -417,7 +417,7 @@ export default function Partners() {
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link
-              className="rounded-md bg-gold px-6 py-3 text-sm font-bold text-navy"
+              className="rounded-md bg-[#ffdf65] px-6 py-3 text-sm font-bold text-[#073d73] transition hover:bg-[#ffe98f]"
               to="/contact"
             >
               Contact Partnerships

@@ -1,52 +1,100 @@
-
 import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
-    <section className="bg-slate-50 pt-[68px] text-navy">
-      <div className="mx-auto grid min-h-[480px] w-[calc(100%-2.25rem)] max-w-[1200px] grid-cols-1 items-center gap-7 py-9 sm:w-[calc(100%-3rem)] md:min-h-[500px] md:grid-cols-2 md:gap-8 md:py-11">
-        {/* Hero content */}
-        <div className="max-w-xl">
-          <span className="text-sm font-bold tracking-wide text-water">
-            Trusted since 2012
-          </span>
+    <section className="relative isolate overflow-hidden bg-[#0066be] text-white">
+      {/* Water splash background */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <img
+          src="/home-water-splash.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover object-[70%_65%]"
+        />
 
-          <h1 className="my-4 text-[clamp(2.7rem,6vw,4.75rem)] leading-[1.02] font-extrabold tracking-[-0.055em] text-navy">
+        {/* Deep blue overlay, similar to the original design */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0058bc]/90 via-[#0066be]/70 to-[#1687e8]/20" />
+
+        {/* Subtle light on the left to keep the design dimensional */}
+        <div className="absolute inset-0 bg-gradient-to-br from-sky-400/10 via-transparent to-[#0058bc]/30" />
+      </div>
+
+      {/* Hero layout */}
+      <div className="mx-auto grid min-h-[620px] max-w-7xl items-center gap-8 px-5 pb-14 pt-28 sm:px-8 sm:pt-32 md:min-h-[680px] md:grid-cols-[1.15fr_0.85fr] md:gap-6 lg:px-12 lg:pb-16 lg:pt-32">
+        {/* Left: Hero content */}
+        <div className="relative z-10 flex flex-col justify-center">
+          <h1 className="max-w-2xl text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.25rem]">
             Clean water.
-            <br />
-            <span className="text-water">Stronger</span> communities.
+            <span className="mt-2 block text-[#ffdf65]">
+              Stronger communities.
+            </span>
           </h1>
 
-          <p className="max-w-[500px] text-[15px] leading-7 text-slate-600 sm:text-base lg:text-[17px] lg:leading-8">
-            Safe, affordable, and reliable drinking water for households,
-            businesses, institutions, and communities across Somalia.
+          <p className="mt-6 max-w-xl text-base leading-8 text-white/90 sm:text-lg">
+            Every drop matters. Ijaabo Water delivers quality drinking water
+            you can trust, helping families, businesses, and communities stay
+            refreshed every day.
           </p>
 
-          {/* Hero buttons */}
-          <div className="mt-6 flex flex-wrap gap-3">
+          {/* Buttons */}
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
-              className="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-md bg-gold px-4 text-xs font-bold text-navy transition hover:bg-amber-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:flex-none sm:px-6 sm:text-sm"
               to="/contact"
+              className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-lg border border-[#ffdf65] bg-[#ffdf65] px-7 py-4 font-bold text-[#073d73] shadow-lg shadow-black/10 transition-colors duration-200 hover:bg-[#ffe98f] hover:border-[#ffe98f] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             >
-              Order Water <span aria-hidden="true">→</span>
+              Order Water
+              <span
+                aria-hidden="true"
+                className="text-lg transition-transform duration-200 group-hover:translate-x-1"
+              >
+                →
+              </span>
             </Link>
 
             <Link
-              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-md border border-slate-400 px-3 text-xs font-bold text-navy transition hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:flex-none sm:px-6 sm:text-sm"
-              to="/contact"
+              to="/contact?customer=Business"
+              className="inline-flex min-h-14 items-center justify-center rounded-lg border border-white/60 bg-[#0058bc]/25 px-7 py-4 font-semibold text-white backdrop-blur-sm transition-colors duration-200 hover:border-white hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             >
               Request Bulk Supply
             </Link>
           </div>
+
+          {/* Trust points */}
+          <div className="mt-9 flex flex-wrap gap-x-6 gap-y-4 text-sm font-medium text-white/90">
+            <span className="inline-flex items-center gap-2">
+              <span className="font-bold text-[#ffdf65]" aria-hidden="true">
+                ✓
+              </span>
+              Quality-focused
+            </span>
+
+            <span className="inline-flex items-center gap-2">
+              <span className="font-bold text-[#ffdf65]" aria-hidden="true">
+                ✓
+              </span>
+              Reliable supply
+            </span>
+
+            <span className="inline-flex items-center gap-2">
+              <span className="font-bold text-[#ffdf65]" aria-hidden="true">
+                ✓
+              </span>
+              Serving communities
+            </span>
+          </div>
         </div>
 
-        {/* Bottle image */}
-        <div className="flex aspect-[1.3] max-h-[420px] min-h-[210px] w-full items-center justify-center overflow-hidden bg-transparent md:aspect-auto md:h-[360px] lg:h-[420px]">
+        {/* Right: Ijaabo water bottle */}
+        <div className="relative flex min-h-[320px] items-center justify-center sm:min-h-[400px] md:min-h-[480px]">
+          {/* Soft blue glow behind the bottle */}
+          <div className="pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-300/20 blur-3xl sm:h-80 sm:w-80" />
+
           <img
-            className="h-full w-full object-contain"
             src="/Ijaabo%20Bottle.webp"
-            alt="Ijaabo Water bottled drinking water"
+            alt="Ijaabo Water 20 litre bottle"
             fetchPriority="high"
+            decoding="async"
+            className="relative z-10 max-h-[430px] w-full max-w-[460px] object-contain drop-shadow-[0_18px_24px_rgba(0,20,40,0.4)]"
           />
         </div>
       </div>

@@ -9,12 +9,12 @@ const benefits = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="bg-white py-14 sm:py-16 lg:py-20">
+    <section id="why-ijaabo" className="my-15 rounded-[2rem] bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center py-14 sm:py-16 lg:py-20">
       <div className="mx-auto w-[calc(100%-2.25rem)] max-w-[1200px] sm:w-[calc(100%-3rem)]">
         <div className="mb-8 flex flex-col items-center text-center sm:mb-10">
-          <span className="text-xs font-bold tracking-wider text-ocean">WHY IJAABO WATER</span>
-          <h2 className="mt-3 text-3xl leading-tight font-bold tracking-tight text-navy sm:text-4xl lg:text-[3.25rem]">Built on trust.<br />Delivered with reliability.</h2>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">From sourcing to delivery, we work to serve Somalia’s homes, businesses, and communities with care.</p>
+          <span className="text-xs font-bold tracking-wider text-sky-100">WHY IJAABO WATER</span>
+          <h2 className="mt-3 text-3xl leading-tight font-bold tracking-tight text-white sm:text-4xl lg:text-[3.25rem]">Built on trust.<br />Delivered with reliability.</h2>
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-sky-100 sm:text-base">From sourcing to delivery, we work to serve Somalia’s homes, businesses, and communities with care.</p>
         </div>
         <div className="grid grid-cols-2 gap-2 sm:gap-4 lg:grid-cols-4">
           {benefits.map(([Icon, title, copy, iconStyle]) => (

@@ -64,24 +64,24 @@ const facts = [
 export default function About() {
   return (
     <main>
-      <section className="bg-slate-50 px-5 py-16 text-center sm:py-20 lg:py-24">
+      <section id="our-story" className="mb-10 rounded-b-[1rem] bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-16 text-center sm:py-20 lg:py-24">
         <div className="mx-auto max-w-4xl">
-          <span className="text-xs font-bold tracking-[0.16em] text-ocean">
+          <span className="text-xs font-bold tracking-[0.16em] text-sky-100">
             OUR STORY
           </span>
-          <h1 className="mt-4 text-4xl leading-tight font-bold tracking-tight text-navy sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 text-4xl leading-tight font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
             Trusted water.
             <br className="sm:hidden" />{" "}
-            <span className="text-water">Stronger Somalia.</span>
+            <span className="text-[#ffdf65]">Stronger Somalia.</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-sky-100 sm:text-lg">
             Founded to answer Somalia’s need for clean, safe, and affordable
             drinking water, Ijaabo Water has served households, businesses,
             institutions, and communities since 2012.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
-              className="inline-flex min-h-12 items-center justify-center rounded-md bg-ocean px-6 text-sm font-bold text-white transition hover:bg-ocean-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#ffdf65] px-6 text-sm font-bold text-[#073d73] transition hover:bg-[#ffe98f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
               to="/products-services"
             >
               Explore products &amp; services
@@ -96,7 +96,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="mx-auto grid w-[calc(100%-2.25rem)] max-w-[1200px] items-center gap-8 py-14 sm:w-[calc(100%-3rem)] sm:py-16 md:grid-cols-2 lg:gap-16 lg:py-20">
+      <section id="who-we-are" className="mx-auto my-3 grid w-[calc(100%-2.25rem)] max-w-[1200px] items-center gap-8 rounded-3xl bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:w-[calc(100%-3rem)] sm:px-8 sm:py-16 md:grid-cols-2 lg:gap-16 lg:py-20">
         <div className="overflow-hidden rounded-2xl bg-slate-100">
           <img
             className="max-h-[440px] w-full object-contain"
@@ -106,19 +106,19 @@ export default function About() {
           />
         </div>
         <div>
-          <span className="text-xs font-bold tracking-[0.14em] text-ocean">
+          <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
             WHO WE ARE
           </span>
-          <h2 className="mt-3 text-3xl leading-tight font-bold tracking-tight text-navy sm:text-4xl">
+          <h2 className="mt-3 text-3xl leading-tight font-bold tracking-tight text-white sm:text-4xl">
             A Somali water company with a community purpose.
           </h2>
-          <p className="mt-5 text-base leading-8 text-slate-600">
+          <p className="mt-5 text-base leading-8 text-sky-100">
             Established by Somali entrepreneurs, Ijaabo Water set out to build a
             reliable, ethical, and sustainable company that contributes to
             national development, creates employment, and improves access to
             safe water.
           </p>
-          <p className="mt-4 text-base leading-8 text-slate-600">
+          <p className="mt-4 text-base leading-8 text-sky-100">
             From its roots as a local provider, the company now serves homes,
             businesses, institutions, and underserved communities, with
             operations and distribution infrastructure that continue to grow.
@@ -126,7 +126,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="bg-navy px-5 py-12 text-white sm:py-14">
+      <section className="my-7 rounded-[2rem] bg-[linear-gradient(rgba(0,72,150,0.92),rgba(0,88,188,0.88)),url('/home-water-splash.png')] bg-cover bg-[center_65%] px-5 py-12 text-white sm:py-14">
         <div className="mx-auto grid max-w-[1200px] grid-cols-2 gap-x-5 gap-y-7 md:grid-cols-4">
           {facts.map(([value, label]) => (
             <div className="border-l border-white/20 pl-4 sm:pl-6" key={label}>
@@ -141,13 +141,13 @@ export default function About() {
         </div>
       </section>
 
-      <section className="px-5 py-14 sm:py-16 lg:py-20">
+      <section id="mission-vision" className="my-7 bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-[1200px]">
           <div className="mx-auto mb-9 max-w-3xl text-center">
-            <span className="text-xs font-bold tracking-[0.14em] text-ocean">
+            <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
               PURPOSE &amp; DIRECTION
             </span>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Purpose-driven water solutions
             </h2>
           </div>
@@ -180,16 +180,16 @@ export default function About() {
         </div>
       </section>
 
-      <section className="bg-slate-50 px-5 py-14 sm:py-16 lg:py-20">
+      <section id="our-values" className="my-3 rounded-[2rem] bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-[1200px]">
           <div className="mx-auto mb-9 max-w-3xl text-center">
-            <span className="text-xs font-bold tracking-[0.14em] text-ocean">
+            <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
               OUR VALUES
             </span>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Principles that guide our work
             </h2>
-            <p className="mt-4 text-base leading-7 text-slate-600">
+            <p className="mt-4 text-base leading-7 text-sky-100">
               These principles shape how Ijaabo serves customers and contributes
               to Somali communities.
             </p>
@@ -211,18 +211,18 @@ export default function About() {
         </div>
       </section>
 
-      <section className="px-5 py-14 sm:py-16">
-        <div className="mx-auto flex max-w-5xl flex-col items-center rounded-2xl bg-sky-50 px-6 py-10 text-center sm:px-10">
-          <h2 className="text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+      <section className="my-3 rounded-[2rem] bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16">
+        <div className="mx-auto flex max-w-5xl flex-col items-center rounded-2xl bg-[linear-gradient(rgba(0,72,150,0.92),rgba(0,88,188,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-6 py-10 text-center sm:px-10">
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Let’s build a reliable water supply.
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
+          <p className="mt-4 max-w-2xl text-base leading-7 text-sky-100">
             Explore Ijaabo’s water products and services, or talk with the team
             about the needs of your household or organization.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link
-              className="inline-flex min-h-12 items-center justify-center rounded-md bg-ocean px-6 text-sm font-bold text-white hover:bg-ocean-dark"
+              className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#ffdf65] px-6 text-sm font-bold text-[#073d73] transition hover:bg-[#ffe98f]"
               to="/products-services"
             >
               Products &amp; Services

@@ -206,17 +206,17 @@ export default function Contact() {
     <main className="flex min-h-[calc(100vh-80px)] items-center justify-center px-4 pt-24 pb-12 sm:px-6 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-16">
       <div className="mx-auto grid w-full max-w-[1120px] items-start gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
         {/* Contact information */}
-        <section className="h-fit rounded-2xl bg-slate-50 p-6 sm:p-8">
+        <section className="h-fit rounded-2xl bg-[linear-gradient(rgba(0,72,150,0.92),rgba(0,88,188,0.88)),url('/home-water-splash.png')] bg-cover bg-center p-6 sm:p-8">
           <div className="mb-8 text-center">
-            <span className="text-xs font-bold tracking-[0.18em] text-ocean">
+            <span className="text-xs font-bold tracking-[0.18em] text-sky-100">
               CONTACT & ORDER
             </span>
 
-            <h1 className="mt-4 text-3xl font-bold tracking-tight text-navy">
+            <h1 className="mt-4 text-3xl font-bold tracking-tight text-white">
               Get in Touch
             </h1>
 
-            <p className="mx-auto mt-4 max-w-sm text-sm leading-7 text-slate-600">
+            <p className="mx-auto mt-4 max-w-sm text-sm leading-7 text-sky-100">
               Contact our team for orders, partnerships, and delivery questions.
             </p>
           </div>
@@ -229,7 +229,7 @@ export default function Contact() {
             <ContactDetail Icon={FiPhone} label="Call Center">
               <a
                 href="tel:2828"
-                className="font-semibold text-ocean hover:underline"
+                className="font-semibold text-[#ffdf65] hover:underline"
               >
                 2828
               </a>
@@ -238,7 +238,7 @@ export default function Contact() {
             <ContactDetail Icon={FiMail} label="General Email">
               <a
                 href="mailto:info@ijaabo.com"
-                className="break-all font-semibold text-ocean hover:underline"
+                className="break-all font-semibold text-[#ffdf65] hover:underline"
               >
                 info@ijaabo.com
               </a>
@@ -247,7 +247,7 @@ export default function Contact() {
             <ContactDetail Icon={FiMail} label="Sales Inquiry">
               <a
                 href="mailto:sales@ijaabo.com"
-                className="break-all font-semibold text-ocean hover:underline"
+                className="break-all font-semibold text-[#ffdf65] hover:underline"
               >
                 sales@ijaabo.com
               </a>
@@ -256,7 +256,7 @@ export default function Contact() {
             <ContactDetail Icon={FiMail} label="Partnership Inquiry">
               <a
                 href="mailto:partners@ijaabo.com"
-                className="break-all font-semibold text-ocean hover:underline"
+                className="break-all font-semibold text-[#ffdf65] hover:underline"
               >
                 partners@ijaabo.com
               </a>
@@ -499,7 +499,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={busy || productsLoading || products.length === 0}
-              className="min-h-12 w-full rounded-lg bg-ocean px-5 text-sm font-bold text-white transition hover:bg-ocean-dark disabled:cursor-not-allowed disabled:opacity-60"
+              className="min-h-12 w-full rounded-lg bg-[#ffdf65] px-5 text-sm font-bold text-[#073d73] transition hover:bg-[#ffe98f] disabled:cursor-not-allowed disabled:opacity-60"
             >
               {busy ? "Submitting order..." : "Send Order Request"}
             </button>
@@ -525,11 +525,11 @@ function ContactDetail({ Icon, label, children }) {
       </span>
 
       <div className="min-w-0 pt-0.5">
-        <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+        <h2 className="text-xs font-bold uppercase tracking-wider text-sky-100">
           {label}
         </h2>
 
-        <div className="mt-2 break-words text-sm leading-6 text-navy">
+        <div className="mt-2 break-words text-sm leading-6 text-white">
           {children}
         </div>
       </div>

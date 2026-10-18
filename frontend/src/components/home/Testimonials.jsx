@@ -8,12 +8,12 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-white py-14 sm:py-16 lg:py-20">
+    <section id="testimonials" className="my-15 bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center py-14 sm:py-16 lg:py-20">
       <div className="mx-auto w-[calc(100%-2.25rem)] max-w-[1200px] sm:w-[calc(100%-3rem)]">
         <div className="mb-8 flex flex-col items-center text-center sm:mb-10">
-          <span className="text-xs font-bold tracking-wider text-ocean">CUSTOMER VOICES</span>
-          <h2 className="mt-3 text-3xl leading-tight font-bold tracking-tight text-navy sm:text-4xl lg:text-[3.25rem]">What Our Customers Say</h2>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">Experiences shared by Ijaabo Water customers and partners.</p>
+          <span className="text-xs font-bold tracking-wider text-sky-100">CUSTOMER VOICES</span>
+          <h2 className="mt-3 text-3xl leading-tight font-bold tracking-tight text-white sm:text-4xl lg:text-[3.25rem]">What Our Customers Say</h2>
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-sky-100 sm:text-base">Experiences shared by Ijaabo Water customers and partners.</p>
         </div>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           {testimonials.map(([quote, name, role]) => (
