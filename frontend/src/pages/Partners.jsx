@@ -266,11 +266,12 @@ export default function Partners() {
       </section>
 
      
-      <section
+      
+<section
   id="our-partners"
   className="mx-auto my-3 max-w-[1200px] rounded-3xl bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16"
 >
-  <header className="mx-auto mb-8 max-w-3xl text-center">
+  <header className="mx-auto mb-10 max-w-3xl text-center">
     <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
       Our Partners
     </span>
@@ -299,31 +300,32 @@ export default function Partners() {
       This section will be Available Soon
     </p>
   ) : (
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+    <div className="flex flex-wrap items-start justify-center gap-x-8 gap-y-8">
       {partners.map((partner) => (
         <article
           key={partner._id}
-          className="flex min-h-32 flex-col items-center justify-center gap-3 rounded-xl border border-white/40 bg-white/95 px-4 py-5 text-center shadow-sm transition-shadow hover:shadow-md"
+          className="flex w-24 flex-col items-center gap-3 text-center"
         >
           {partner.logo && (
-            <div className="flex h-12 w-full max-w-[140px] items-center justify-center">
+            <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border-2 border-white/80 bg-white p-2 shadow-md">
               <img
                 src={getImageUrl(partner.logo)}
                 alt={`${partner.name} logo`}
-                className="block max-h-10 max-w-[120px] object-contain"
+                className="h-full w-full rounded-full object-contain"
                 loading="lazy"
               />
             </div>
           )}
 
-          <h3 className="text-sm font-semibold leading-5 text-[#00008B]">
+          <h3 className="w-full break-words text-sm font-semibold leading-5 text-white">
             {partner.name}
           </h3>
         </article>
       ))}
     </div>
   )}
-      </section>
+</section>
+
 
 
       <section id="partner-with-us" className="my-7 bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16">
