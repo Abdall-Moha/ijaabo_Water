@@ -1,3 +1,4 @@
+
 import { Router } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -8,42 +9,122 @@ import { adminLoginLimiter } from "../middleware/rateLimitMiddleware.js";
 
 const router = Router();
 
-// Admin login
-router.post("/login", adminLoginLimiter, async (request, response) => {
-  try {
-    const { email, password } = request.body || {};
+// Check whether an email address is valid
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
 
-    if (typeof email !== "string" || typeof password !== "string" || !email.trim() || !password) {
-      return response.status(400).json({ message: "Email and password are required" });
+// Check whether a password is valid for bcrypt
+function isValidPassword(password) {
+  return (
+    typeof password === "string" &&
+    password.length >= 8 &&
+    Buffer.byteLength(password, "utf8") <= 72
+  );
+}
+
+// Register the first admin only when the User collection is empty
+router.post("/register-first-admin", adminLoginLimiter, async (req, res) => {
+  try {
+    const { name, email, password } = req.body || {};
+
+    // Check whether any user already exists
+    const userExists = await User.exists({});
+
+    if (userExists) {
+      return res.status(403).json({
+        message: "Registration is closed because a user already exists"
+      });
     }
 
-    const user = await User.findOne({ email: email.trim().toLowerCase(), role: "ADMIN" });
+    if (
+      typeof name !== "string" ||
+      !name.trim() ||
+      typeof email !== "string" ||
+      !isValidEmail(email.trim()) ||
+      !isValidPassword(password)
+    ) {
+      return res.status(400).json({
+        message: "Provide a name, valid email, and password of 8 to 72 bytes"
+      });
+    }
 
-    if (!user) {
-      return response.status(401).json({ message: "Invalid email or password" });
+    const admin = await User.create({
+      name: name.trim(),
+      email: email.trim().toLowerCase(),
+      password: await bcrypt.hash(password, 12),
+      role: "ADMIN",
+      isActive: true
+    });
+
+    return res.status(201).json({
+      message: "First admin registered successfully",
+      user: {
+        id: admin._id,
+        name: admin.name,
+        email: admin.email,
+        role: admin.role
+      }
+    });
+  } catch (error) {
+    if (error.code === 11000) {
+      return res.status(409).json({
+        message: "This email is already registered"
+      });
+    }
+
+    return res.status(500).json({
+      message: "Failed to register first admin"
+    });
+  }
+});
+
+// Admin login
+router.post("/login", adminLoginLimiter, async (req, res) => {
+  try {
+    const { email, password } = req.body || {};
+
+    if (
+      typeof email !== "string" ||
+      !email.trim() ||
+      typeof password !== "string" ||
+      !password
+    ) {
+      return res.status(400).json({
+        message: "Email and password are required"
+      });
+    }
+
+    const user = await User.findOne({
+      email: email.trim().toLowerCase(),
+      role: "ADMIN"
+    });
+
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(401).json({
+        message: "Invalid email or password"
+      });
     }
 
     if (!user.isActive) {
-      return response.status(403).json({ message: "This admin account is inactive" });
-    }
-
-    const passwordMatches = await bcrypt.compare(password, user.password);
-
-    if (!passwordMatches) {
-      return response.status(401).json({ message: "Invalid email or password" });
+      return res.status(403).json({
+        message: "This admin account is inactive"
+      });
     }
 
     if (!process.env.JWT_SECRET) {
-      return response.status(500).json({ message: "JWT_SECRET is not configured" });
+      return res.status(500).json({
+        message: "JWT_SECRET is not configured"
+      });
     }
 
     const token = jwt.sign(
-      { id: user._id, role: user.role },
+      { id: user._id.toString(), role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: process.env.JWT_EXPIRES_IN || "1d" }
     );
 
-    return response.json({
+    return res.json({
       token,
       user: {
         id: user._id,
@@ -53,38 +134,51 @@ router.post("/login", adminLoginLimiter, async (request, response) => {
       }
     });
   } catch (error) {
-    return response.status(500).json({ message: "Failed to log in" });
-  }
-});
-// Return the current database-backed admin identity for protected frontend routes.
-router.get("/me", authMiddleware, async (request, response) => {
-  try {
-    const user = await User.findById(request.user.id).select("name email role isActive");
-    return response.json({ user });
-  } catch (error) {
-    return response.status(500).json({ message: "Failed to get admin profile" });
+    return res.status(500).json({
+      message: "Failed to log in"
+    });
   }
 });
 
-// Change the authenticated admin's password
-router.put("/change-password", authMiddleware, async (request, response) => {
+// Get the logged-in admin's profile
+router.get("/me", authMiddleware, async (req, res) => {
   try {
-    const { currentPassword, newPassword } = request.body || {};
+    const user = await User.findById(req.user.id)
+      .select("name email role isActive");
 
-    if (!currentPassword || !newPassword) {
-      return response.status(400).json({
-        message: "Current and new passwords are required"
+    if (!user) {
+      return res.status(404).json({
+        message: "Admin user not found"
       });
     }
 
-    if (typeof newPassword !== "string" || newPassword.length < 8 || Buffer.byteLength(newPassword, "utf8") > 72) {
-      return response.status(400).json({ message: "The new password must be 8 to 72 bytes" });
+    return res.json({ user });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Failed to get admin profile"
+    });
+  }
+});
+
+// Change the logged-in admin's password
+router.put("/change-password", authMiddleware, async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body || {};
+
+    if (
+      typeof currentPassword !== "string" ||
+      !currentPassword ||
+      !isValidPassword(newPassword)
+    ) {
+      return res.status(400).json({
+        message: "Provide your current password and a valid new password"
+      });
     }
 
-    const user = await User.findById(request.user.id);
+    const user = await User.findById(req.user.id);
 
     if (!user) {
-      return response.status(404).json({
+      return res.status(404).json({
         message: "Admin user not found"
       });
     }
@@ -95,7 +189,7 @@ router.put("/change-password", authMiddleware, async (request, response) => {
     );
 
     if (!passwordMatches) {
-      return response.status(400).json({
+      return res.status(400).json({
         message: "Current password is incorrect"
       });
     }
@@ -103,43 +197,66 @@ router.put("/change-password", authMiddleware, async (request, response) => {
     user.password = await bcrypt.hash(newPassword, 12);
     await user.save();
 
-    return response.json({
+    return res.json({
       message: "Password changed successfully"
     });
   } catch (error) {
-    return response.status(500).json({
+    return res.status(500).json({
       message: "Failed to change password"
     });
   }
 });
 
-// Admin user management
-router.get("/admins", authMiddleware, async (request, response) => {
+// Get all admins
+router.get("/admins", authMiddleware, async (req, res) => {
   try {
+    if (req.user.role !== "ADMIN") {
+      return res.status(403).json({
+        message: "Only admins can view admin users"
+      });
+    }
+
     const admins = await User.find({ role: "ADMIN" })
       .select("name email role isActive createdAt")
       .sort({ createdAt: 1 });
-    return response.json(admins);
+
+    return res.json(admins);
   } catch (error) {
-    return response.status(500).json({ message: "Failed to get admin users" });
+    return res.status(500).json({
+      message: "Failed to get admin users"
+    });
   }
 });
 
-router.post("/admins", authMiddleware, async (request, response) => {
+// Create another admin
+router.post("/admins", authMiddleware, async (req, res) => {
   try {
-    const { name, email, password } = request.body || {};
+    if (req.user.role !== "ADMIN") {
+      return res.status(403).json({
+        message: "Only admins can create admin users"
+      });
+    }
+
+    const { name, email, password } = req.body || {};
+
     if (
-      typeof name !== "string" || !name.trim() ||
-      typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()) ||
-      typeof password !== "string" || password.length < 8 ||
-      Buffer.byteLength(password, "utf8") > 72
+      typeof name !== "string" ||
+      !name.trim() ||
+      typeof email !== "string" ||
+      !isValidEmail(email.trim()) ||
+      !isValidPassword(password)
     ) {
-      return response.status(400).json({ message: "Provide a name, valid email, and password between 8 and 72 bytes" });
+      return res.status(400).json({
+        message: "Provide a name, valid email, and password of 8 to 72 bytes"
+      });
     }
 
     const normalizedEmail = email.trim().toLowerCase();
+
     if (await User.exists({ email: normalizedEmail })) {
-      return response.status(409).json({ message: "A user with this email already exists" });
+      return res.status(409).json({
+        message: "This email is already registered"
+      });
     }
 
     const admin = await User.create({
@@ -147,74 +264,70 @@ router.post("/admins", authMiddleware, async (request, response) => {
       email: normalizedEmail,
       password: await bcrypt.hash(password, 12),
       role: "ADMIN",
-      isActive: true,
+      isActive: true
     });
-    return response.status(201).json({
+
+    return res.status(201).json({
       message: "Admin created successfully",
-      user: { id: admin._id, name: admin.name, email: admin.email, role: admin.role, isActive: admin.isActive },
+      user: {
+        id: admin._id,
+        name: admin.name,
+        email: admin.email,
+        role: admin.role,
+        isActive: admin.isActive
+      }
     });
   } catch (error) {
-    if (error.code === 11000) return response.status(409).json({ message: "A user with this email already exists" });
-    return response.status(500).json({ message: "Failed to create admin" });
-  }
-});
-
-router.put("/admins/:id", authMiddleware, async (request, response) => {
-  try {
-    const { id } = request.params;
-    const { name, email, password } = request.body || {};
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return response.status(400).json({ message: "Invalid admin ID" });
-    }
-    if (id === request.user.id) {
-      return response.status(400).json({ message: "Use Settings to update your own account" });
-    }
-    if (
-      typeof name !== "string" || !name.trim() ||
-      typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
-    ) {
-      return response.status(400).json({ message: "Name and email are required" });
-    }
-    if (password !== undefined && (typeof password !== "string" || (password && (password.length < 8 || Buffer.byteLength(password, "utf8") > 72)))) {
-      return response.status(400).json({ message: "A new password must be between 8 and 72 bytes" });
-    }
-
-    const admin = await User.findOne({ _id: id, role: "ADMIN" });
-    if (!admin) return response.status(404).json({ message: "Admin not found" });
-
-    const normalizedEmail = email.trim().toLowerCase();
-    const duplicate = await User.exists({ email: normalizedEmail, _id: { $ne: admin._id } });
-    if (duplicate) return response.status(409).json({ message: "A user with this email already exists" });
-
-    admin.name = name.trim();
-    admin.email = normalizedEmail;
-    if (password) admin.password = await bcrypt.hash(password, 12);
-    await admin.save();
-    return response.json({
-      message: "Admin updated successfully",
-      user: { id: admin._id, name: admin.name, email: admin.email, role: admin.role, isActive: admin.isActive },
-    });
-  } catch (error) {
-    if (error.code === 11000) return response.status(409).json({ message: "A user with this email already exists" });
-    return response.status(500).json({ message: "Failed to update admin" });
-  }
-});
-
-// Activate or deactivate another Admin
-router.put("/admin/:id/status", authMiddleware, async (request, response) => {
-  try {
-    const { id } = request.params;
-    const { isActive } = request.body || {};
-
-    if (request.user.role !== "ADMIN") {
-      return response.status(403).json({
-        message: "Only an admin can change another admin's status"
+    if (error.code === 11000) {
+      return res.status(409).json({
+        message: "This email is already registered"
       });
     }
 
-    if (typeof isActive !== "boolean") {
-      return response.status(400).json({
-        message: "isActive must be true or false"
+    return res.status(500).json({
+      message: "Failed to create admin"
+    });
+  }
+});
+
+// Update another admin
+router.put("/admins/:id", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.role !== "ADMIN") {
+      return res.status(403).json({
+        message: "Only admins can update admin users"
+      });
+    }
+
+    const { id } = req.params;
+    const { name, email, password } = req.body || {};
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: "Invalid admin ID"
+      });
+    }
+
+    if (id === req.user.id) {
+      return res.status(400).json({
+        message: "Use Settings to update your own account"
+      });
+    }
+
+    if (
+      typeof name !== "string" ||
+      !name.trim() ||
+      typeof email !== "string" ||
+      !isValidEmail(email.trim())
+    ) {
+      return res.status(400).json({
+        message: "Provide a valid name and email"
+      });
+    }
+
+    if (password !== undefined && password !== "" && !isValidPassword(password)) {
+      return res.status(400).json({
+        message: "Password must be between 8 and 72 bytes"
       });
     }
 
@@ -224,22 +337,101 @@ router.put("/admin/:id/status", authMiddleware, async (request, response) => {
     });
 
     if (!admin) {
-      return response.status(404).json({
+      return res.status(404).json({
         message: "Admin not found"
       });
     }
 
-    // Prevent an admin from deactivating their own account
-    if (admin._id.toString() === request.user.id.toString()) {
-      return response.status(400).json({
+    const normalizedEmail = email.trim().toLowerCase();
+
+    const duplicate = await User.exists({
+      email: normalizedEmail,
+      _id: { $ne: admin._id }
+    });
+
+    if (duplicate) {
+      return res.status(409).json({
+        message: "This email is already registered"
+      });
+    }
+
+    admin.name = name.trim();
+    admin.email = normalizedEmail;
+
+    if (password) {
+      admin.password = await bcrypt.hash(password, 12);
+    }
+
+    await admin.save();
+
+    return res.json({
+      message: "Admin updated successfully",
+      user: {
+        id: admin._id,
+        name: admin.name,
+        email: admin.email,
+        role: admin.role,
+        isActive: admin.isActive
+      }
+    });
+  } catch (error) {
+    if (error.code === 11000) {
+      return res.status(409).json({
+        message: "This email is already registered"
+      });
+    }
+
+    return res.status(500).json({
+      message: "Failed to update admin"
+    });
+  }
+});
+
+// Activate or deactivate another admin
+router.put("/admin/:id/status", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.role !== "ADMIN") {
+      return res.status(403).json({
+        message: "Only admins can change admin status"
+      });
+    }
+
+    const { id } = req.params;
+    const { isActive } = req.body || {};
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: "Invalid admin ID"
+      });
+    }
+
+    if (typeof isActive !== "boolean") {
+      return res.status(400).json({
+        message: "isActive must be true or false"
+      });
+    }
+
+    if (id === req.user.id) {
+      return res.status(400).json({
         message: "You cannot change your own admin status"
+      });
+    }
+
+    const admin = await User.findOne({
+      _id: id,
+      role: "ADMIN"
+    });
+
+    if (!admin) {
+      return res.status(404).json({
+        message: "Admin not found"
       });
     }
 
     admin.isActive = isActive;
     await admin.save();
 
-    return response.json({
+    return res.json({
       message: isActive
         ? "Admin activated successfully"
         : "Admin deactivated successfully",
@@ -252,9 +444,10 @@ router.put("/admin/:id/status", authMiddleware, async (request, response) => {
       }
     });
   } catch (error) {
-    return response.status(500).json({
+    return res.status(500).json({
       message: "Failed to update admin status"
     });
   }
 });
+
 export default router;
