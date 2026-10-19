@@ -265,68 +265,50 @@ export default function Partners() {
         </div>
       </section>
 
-     
-      
-<section
-  id="our-partners"
-  className="mx-auto my-3 max-w-[1200px] rounded-3xl bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16"
->
-  <header className="mx-auto mb-10 max-w-3xl text-center">
-    <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
-      Our Partners
-    </span>
-
-    <h2 className={titleClass}>
-      Trusted by Leading Organizations
-    </h2>
-
-    <p className="mt-4 text-base leading-7 text-sky-100">
-      Ijaabo Water partners with development organizations, institutions,
-      businesses, and community organizations committed to clean water
-      access.
-    </p>
-  </header>
-
-  {loadingPartners ? (
-    <p className="rounded-2xl bg-white/95 p-8 text-center text-slate-600">
-      Loading partners…
-    </p>
-  ) : partnersError ? (
-    <p className="rounded-2xl bg-amber-50 p-6 text-center text-amber-950">
-      Partner information could not be loaded. Please try again later.
-    </p>
-  ) : partners.length === 0 ? (
-    <p className="rounded-2xl bg-white/95 p-8 text-center font-semibold text-slate-600">
-      This section will be Available Soon
-    </p>
-  ) : (
-    <div className="flex flex-wrap items-start justify-center gap-x-8 gap-y-8">
-      {partners.map((partner) => (
-        <article
-          key={partner._id}
-          className="flex w-24 flex-col items-center gap-3 text-center"
-        >
-          {partner.logo && (
-            <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border-2 border-white/80 bg-white p-2 shadow-md">
-              <img
-                src={getImageUrl(partner.logo)}
-                alt={`${partner.name} logo`}
-                className="h-full w-full rounded-full object-contain"
-                loading="lazy"
-              />
-            </div>
-          )}
-
-          <h3 className="w-full break-words text-sm font-semibold leading-5 text-white">
-            {partner.name}
-          </h3>
-        </article>
-      ))}
-    </div>
-  )}
-</section>
-
-
+      <section id="our-partners" className="mx-auto my-3 max-w-[1200px] rounded-3xl bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16">
+        <header className="mx-auto mb-8 max-w-3xl text-center">
+          <span className="text-xs font-bold tracking-[0.14em] text-sky-100">
+            Our Partners
+          </span>
+          <h2 className={titleClass}>Trusted by Leading Organizations</h2>
+          <p className="mt-4 text-base leading-7 text-sky-100">
+            Ijaabo Water partners with development organizations, institutions,
+            businesses, and community organizations committed to clean water
+            access.
+          </p>
+        </header>
+        {loadingPartners ? (
+          <p className="rounded-2xl border border-slate-200 bg-white p-8 text-center text-slate-600">
+            Loading partners…
+          </p>
+        ) : partnersError ? (
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-center text-amber-950">
+            Partner information could not be loaded. Please try again later.
+          </p>
+        ) : partners.length === 0 ? (
+          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-8 text-center font-semibold text-slate-600">
+            This section will be Available Soon
+          </p>
+        ) : (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {partners.map((partner) => (
+              <article
+                key={partner._id}
+                className="flex min-h-40 flex-col items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm"
+              >
+                {partner.logo && (
+                  <img
+                    src={getImageUrl(partner.logo)}
+                    alt={`${partner.name} logo`}
+                    className="h-16 max-w-full object-contain"
+                  />
+                )}
+                <h3 className="font-bold text-navy">{partner.name}</h3>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
 
       <section id="partner-with-us" className="my-7 bg-[linear-gradient(135deg,rgba(0,102,190,0.93),rgba(8,117,206,0.88)),url('/home-water-splash.png')] bg-cover bg-center px-5 py-14 sm:py-16">
         <div className="mx-auto max-w-3xl">
