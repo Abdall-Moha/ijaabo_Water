@@ -78,7 +78,7 @@ export default function AdminOverview() {
   const recentInquiries = inquiries?.slice(0, 5) || [];
 
   return (
-    <div>
+    <div className="w-full min-w-0">
       <PageHeader
         title="Dashboard overview"
         description="Current totals and recent activity from your Ijaabo Water records."
@@ -92,14 +92,14 @@ export default function AdminOverview() {
           </Link>
         }
       />
-      <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-3">
+      <div className="grid grid-cols-[repeat(2,minmax(0,1fr))] gap-3 sm:gap-4 xl:grid-cols-3">
         {metrics.map(([label, value, Icon]) => (
           <article
             key={label}
-            className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5"
+            className="min-w-0 rounded-xl border border-slate-200 bg-white p-3 shadow-sm sm:p-5"
           >
             <div className="flex items-start justify-between gap-2">
-              <p className="min-w-0 text-xs font-medium leading-5 text-slate-600 sm:text-sm">
+              <p className="min-w-0 break-words text-xs font-medium leading-5 text-slate-600 sm:text-sm">
                 {label}
               </p>
               <Icon className="shrink-0 text-lg text-[#2B4593] sm:text-xl" />
@@ -115,8 +115,8 @@ export default function AdminOverview() {
         ))}
       </div>
 
-      <div className="mt-6 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-        <section className="rounded-xl border border-slate-200 bg-white p-5">
+      <div className="mt-6 grid min-w-0 gap-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
+        <section className="min-w-0 rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="font-bold text-slate-900">Recent orders</h2>
             <Link
@@ -131,7 +131,7 @@ export default function AdminOverview() {
           ) : recentOrders.length === 0 ? (
             <EmptyState>No orders have been submitted yet.</EmptyState>
           ) : (
-            <div className="overflow-x-auto">
+            <div className="w-full min-w-0 overflow-x-auto overscroll-x-contain">
               <table className="w-full min-w-[520px] text-left text-sm">
                 <thead className="text-xs uppercase text-slate-500">
                   <tr>
@@ -157,7 +157,7 @@ export default function AdminOverview() {
             </div>
           )}
         </section>
-        <section className="rounded-xl border border-slate-200 bg-white p-5">
+        <section className="min-w-0 rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="font-bold text-slate-900">
               Order status distribution
@@ -188,9 +188,9 @@ export default function AdminOverview() {
           )}
         </section>
       </div>
-      <section className="mt-6 rounded-xl border border-slate-200 bg-white p-5">
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-bold text-slate-900">
+      <section className="mt-6 min-w-0 rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
+        <div className="mb-4 flex min-w-0 flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="min-w-0 break-words font-bold text-slate-900">
             Recent partnership inquiries
           </h2>
           <Link
@@ -209,14 +209,14 @@ export default function AdminOverview() {
             No partnership inquiries have been submitted yet.
           </EmptyState>
         ) : (
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid min-w-0 gap-3 md:grid-cols-2 xl:grid-cols-3">
             {recentInquiries.map((item) => (
               <article
                 key={item._id}
-                className="rounded-lg border border-slate-200 p-4"
+                className="min-w-0 rounded-lg border border-slate-200 p-4"
               >
                 <div className="flex items-start justify-between gap-2">
-                  <h3 className="font-semibold text-slate-900">
+                  <h3 className="min-w-0 break-words font-semibold text-slate-900">
                     {item.organizationName}
                   </h3>
                   <StatusTag value={item.status} />
